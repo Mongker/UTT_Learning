@@ -1,0 +1,150 @@
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+.container_login {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 5%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('https://id.unica.vn/images/bg-01.jpg');
+}
+.text_center {
+    text-align: center!important;
+}
+.form_group {
+    margin-bottom: 1rem;
+    font-size: 41px;
+    font-weight: bold;
+    color: #ffb18c;
+    cursor: pointer;
+}
+.login {
+    width: 680px;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    display: inline-block;
+    padding-left: 110px;
+    padding-right: 110px;
+    padding-bottom: 13px;
+    padding-top: 20px;
+    box-sizing: inherit;
+}
+.title {
+    text-align: center;
+    color: #323232;
+    font-size: 1.75rem;
+    font-family: inherit;
+}
+.form_login {
+    width: 100%;
+}
+.wrap_input {
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+    background-color: #fdfdfd;
+    border: 1px solid #cecece;
+    border-radius: 21px;
+    box-sizing: border-box;
+}
+.wrap_input > input {
+    outline: none;
+    border: none;
+}
+.input0 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 16px 18px;
+    background-position: 98% 50%;
+    cursor: auto;
+    color: #333333;
+    line-height: 1.2;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 20px;
+    border: 1px solid #e2e2e2;
+}
+.wrap_input > input:focus {
+    border-radius: 20px;
+    border: 1px solid #fc00ff;
+    height: 40px;
+    transition: border 1s ease;
+}
+.title_login {
+    width: 100%;
+    display: -moz-box;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #38aae6;
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    font-size: 1.75rem;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+.title_singup {
+    width: 100%;
+    display: -moz-box;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #38aae6;
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    font-size: 1.75rem;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
+.title_singup:hover {
+    background: #a64bf4;
+    background: -webkit-linear-gradient(
+            45deg
+            , #00dbde, #fc00ff);
+    background: -o-linear-gradient(45deg, #00dbde, #fc00ff);
+    background: -moz-linear-gradient(45deg, #00dbde, #fc00ff);
+    background: linear-gradient(
+            45deg
+            , #00dbde, #fc00ff);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}.title_login:hover {
+    background: #a64bf4;
+    background: -webkit-linear-gradient(
+            45deg
+            , #00dbde, #fc00ff);
+    background: -o-linear-gradient(45deg, #00dbde, #fc00ff);
+    background: -moz-linear-gradient(45deg, #00dbde, #fc00ff);
+    background: linear-gradient(
+            45deg
+            , #00dbde, #fc00ff);
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}

@@ -1,0 +1,13 @@
+.controller_video {
+  :global {
+    .ant-modal-header {
+      display: none;
+    }
+    .ant-modal-footer {
+      display: none;
+    }
+    .ant-modal-body {
+      padding: unset;
+    }
+  }
+}

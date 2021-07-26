@@ -1,0 +1,17 @@
+.controller {
+  width: 100%;
+  :global {
+    .ant-list {
+      width: 100%;
+    }
+    .ant-tabs {
+      width: 100%;
+    }
+    .ant-list-split {
+      width: 100%;
+    }
+    .ant-list * {
+      width: 100%;
+    }
+  }
+}

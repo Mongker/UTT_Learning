@@ -1,0 +1,17 @@
+0000000000000000000000000000000000000000 8f3f97c47f8719486c37315147a17bbcbe5b919d MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620149920 +0700	clone: from github.com:Mongker/unica.git
+8f3f97c47f8719486c37315147a17bbcbe5b919d 8948475f3285a532f0bd63e5dd66db513216b3ec MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620158315 +0700	commit: MongLV: quan ly khoa hoc
+8948475f3285a532f0bd63e5dd66db513216b3ec 084d2569b77cd43bc3db0b5da25192329153b117 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620198583 +0700	commit: MongLV: studyprgram
+084d2569b77cd43bc3db0b5da25192329153b117 c44fd6219287cf4d4ffe3d42e693905bd34d65bb MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620363207 +0700	commit: Mong update
+c44fd6219287cf4d4ffe3d42e693905bd34d65bb 031c558959e4b32279a75210fe000e79bdb91af1 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620406376 +0700	commit: MongLV: thêm giao dien phan khach hang
+031c558959e4b32279a75210fe000e79bdb91af1 9f8023c50338a5e88b8c2e6ccb2a7b1ae3a8e0f7 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620609543 +0700	commit: database backup
+9f8023c50338a5e88b8c2e6ccb2a7b1ae3a8e0f7 93b5487f2efa6f9ee979076a784ca777c4ed0f5b MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620694589 +0700	commit: Detail
+93b5487f2efa6f9ee979076a784ca777c4ed0f5b ddebbb5af4b794544d90fd648fe5bba0d9858e7f MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620857214 +0700	commit: OK: 100%
+ddebbb5af4b794544d90fd648fe5bba0d9858e7f 62fd462d77d83b8ecb97bd0c28afdf0ca97d6880 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620869064 +0700	commit: Them database
+62fd462d77d83b8ecb97bd0c28afdf0ca97d6880 db979da86522cf1236e51d0a650c2d5e7b8505cb MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1620912688 +0700	pull --no-stat -v --progress origin main: Fast-forward
+db979da86522cf1236e51d0a650c2d5e7b8505cb d1c57667ed46c230bdab0009a52295289146d32c MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1622980967 +0700	commit: Đẩy code fix một số
+d1c57667ed46c230bdab0009a52295289146d32c 359daac8a451fbd17acdea5bc07d7e3bd81a8fa2 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1626269554 +0700	commit: Chỉ api server
+359daac8a451fbd17acdea5bc07d7e3bd81a8fa2 f227366733247c2c786e29e89367b0f4bec5c66a MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1626273418 +0700	commit: API server client
+f227366733247c2c786e29e89367b0f4bec5c66a c8331a99e228d9ff222023c8bdae324293ee36df MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1626789365 +0700	commit: Đẩy code
+c8331a99e228d9ff222023c8bdae324293ee36df 032f105613d991872a7a4a14a0c7394c64f1739c MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1626828832 +0700	commit: MongLV: fix code hieu chinh toan bo website
+032f105613d991872a7a4a14a0c7394c64f1739c 1df580c568296cada6cf013da87b937bc4d836f0 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1627266033 +0700	commit: toiuu
+1df580c568296cada6cf013da87b937bc4d836f0 1df580c568296cada6cf013da87b937bc4d836f0 MaiDTTM <68932625+MaiDao99@users.noreply.github.com> 1627324622 +0700	Branch: renamed refs/heads/main to refs/heads/main

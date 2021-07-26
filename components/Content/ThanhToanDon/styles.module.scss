@@ -1,0 +1,116 @@
+.form_than_toan{
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+.u_bread_cart {
+  background: #1d9fc7;
+  color: #fff;
+  font-size: 30px;
+  padding: 35px 0;
+}
+.container {
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 70px;
+  padding: 0 100px;
+}
+.unica_order_cart {
+  background: #e8e8e8;
+}
+.controller_left {
+  width: 65%;
+}
+.controller_rigth {
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 35%;
+}
+.title_left{
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.u_box_cart2 {
+  padding: 15px;
+  margin: 10px 0 50px 0;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+}
+.btn_next{
+  background: #F26C4F !important;
+  width: 100% !important;
+  height: 48px;
+  padding: 12px !important;
+  border: none !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  color: white !important;
+  font-weight: bold;
+}
+.u_c_title {
+  border-bottom: 1px solid #e6e6e6;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.u_c_title p {
+  font-size: 14px;
+  float: left;
+  font-weight: bold;
+}
+.u_cart_course {
+  display: flex;
+  border-bottom: 1px solid #dedfe0;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.title_cart_course {
+  text-align: left;
+  width: 70%;
+  line-height: 1.5em;
+}
+.price_cart {
+  width: 30%;
+  text-align: right;
+}
+.price_cart p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.u_cart_price2 p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.price_cart span {
+  text-decoration: line-through;
+}
+.price_cart span sup {
+  font-size: 10px;
+}
+.total_cart {
+  margin-top: 10px;
+  padding-top: 5px;
+  width: 100%;
+  display: inline-block;
+}
+.total_cart p {
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+}
+.total_cart span {
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f00;
+}

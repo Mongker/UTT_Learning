@@ -1,0 +1,11 @@
+.upload_file {
+  :global {
+    .anticon-eye {
+      display: none;
+    }
+
+    .ant-upload-select-picture-card, .ant-upload-list-item, .ant-upload-list-picture-card-container, .ant-upload-list, .ant-upload-picture-card-wrapper {
+      //@include img;
+    }
+  }
+}

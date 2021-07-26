@@ -1,0 +1,11 @@
+.action {
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.item_action{
+  color: #dd27e3;
+}
+.item_action:hover{
+  cursor: pointer;
+}

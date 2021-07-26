@@ -1,0 +1,196 @@
+.form_account {
+  margin-top: 60px;
+}
+.u_dashboard_top {
+  background-image: url(https://unica.vn/media/img/bg-db.jpg);
+  padding: 50px 0 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  //height: 149px;
+  min-height: 522px;
+  background-position: center;
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 1170px;
+}
+.row_content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.u_dashboard_top p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+.navbar_collapse {
+  padding-left: 0;
+}
+.u_dashboard_top ul li {
+  display: inline;
+  margin-right: 10px;
+  position: relative;
+}
+.navbar_collapse .tab {
+  position: relative;
+  color: #fff;
+}
+.u_dashboard_top i {
+  width: 20px;
+  text-align: center;
+}
+.fa {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.nav_tabs .dropdown_menu {
+  margin-top: -1px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  background-clip: padding-box;
+}
+.dropdown_menu li {
+  width: 100%;
+}
+.u_dashboard_top ul li a {
+  padding: 8px;
+}
+.nav_tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.content_main_user {
+  min-height: 522px;
+  margin-bottom: 20px;
+  background-color: #f2f2f2;
+}
+.ul_pass{
+  display: flex;
+  padding: 10px 0px 0 0;
+  margin-bottom: 10px;
+}
+.panel_default {
+  border-color: #dddddd;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.panel_default > .panel_heading {
+  color: #333333;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+.panel_heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.pull_right {
+  float: right !important;
+  padding-right: 20px;
+}
+.margin_left {
+  margin-left: 15px;
+  color: #ffffff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+  padding: 3px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.div_goi_y {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.btn_goi_y {
+  width: 200px;
+  color: #ffffff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+.content_main_user {
+  background-color: #f2f2f2;
+}
+.content_main_user_content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 1170px;
+}
+.header_pass {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.margin_right {
+  margin-left: 15px;
+  color: #333333 !important;
+  background-color: #fff;
+  border-color: #eea236;
+  padding: 3px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.panel_body {
+  padding: 25px;
+}
+@media (min-width: 768px) {
+  .navbar_collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+}
+@media (min-width: 768px) {
+  .navbar_collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+}
