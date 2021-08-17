@@ -1,5 +1,5 @@
 {
-  "name": "unica",
+  "name": "UTT_Learning",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -8,7 +8,7 @@
     "dev": "next dev -p 2000",
     "build": "next build",
     "start": "next start -p 1919",
-    "install:unica": "npm install && npm install ./ServerAPI"
+    "install:web": "npm install && npm install ./ServerAPI"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
