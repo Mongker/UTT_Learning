@@ -21,30 +21,6 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `dbunica`
 --
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `biodata`
---
-
-CREATE TABLE `biodata` (
-  `id_biodata` int(11) NOT NULL,
-  `nama` varchar(40) NOT NULL,
-  `alamat` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `biodata`
---
-
-INSERT INTO `biodata` (`id_biodata`, `nama`, `alamat`) VALUES
-(2, 'Muh Berlian Nusantara', 'Banyuwangi'),
-(3, 'Ivan Fadila', 'Lumajang'),
-(4, 'Dinar pratnyaningrum', 'Malang'),
-(5, 'raka ardianata', 'condong');
-
--- --------------------------------------------------------
-
 --
 -- Cấu trúc bảng cho bảng `cart`
 --
@@ -89,14 +65,14 @@ CREATE TABLE `category` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sort_order` int(11) NOT NULL COMMENT 'Thứ tự xắp sếp',
-  `create` varchar(100) COLLATE utf8_unicode_ci DEFAULT current_timestamp()
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `category`
 --
 
-INSERT INTO `category` (`id`, `rootId`, `icon`, `status`, `name`, `description`, `sort_order`, `create`) VALUES
+INSERT INTO `category` (`id`, `rootId`, `icon`, `status`, `name`, `description`, `sort_order`, `created`) VALUES
 (63, 1, '[jwI]-language.png', 1, 'Ngoại ngữ', 'Nơi đăng tải các khóa học giảng dạy ngoại ngữ', 1, '2021-05-01 07:04:51'),
 (64, 1, '[EGi]-line-chart.png', 1, 'Marketing', '', 1, '2021-05-01 07:07:03'),
 (65, 1, '[yfo]-desktop-monitor.png', 1, 'Tin học văn phòng', '', 1, '2021-05-01 07:07:31'),
@@ -200,7 +176,7 @@ CREATE TABLE `comment` (
   `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `vote` int(11) NOT NULL,
   `video_id` int(11) NOT NULL,
-  `create` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -250,7 +226,7 @@ CREATE TABLE `product` (
   `sale` int(10) NOT NULL DEFAULT 0,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `number_user` int(100) DEFAULT 0,
-  `list_number` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]' CHECK (json_valid(`list_number`)),
+  `list_number` longtext COLLATE utf8_unicode_ci NOT NULL,
   `content_full` longtext COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -448,8 +424,8 @@ CREATE TABLE `user` (
   `phone` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `address` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `info` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '{}' CHECK (json_valid(`info`)),
-  `list_product_open` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '[]' CHECK (json_valid(`list_product_open`)),
+  `info` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `list_product_open` longtext COLLATE utf8_unicode_ci NOT NULL,
   `rank` int(10) NOT NULL,
   `role` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `coin` int(10) NOT NULL,
@@ -457,14 +433,14 @@ CREATE TABLE `user` (
   `status_user` tinyint(1) NOT NULL,
   `avatar` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `gender` tinyint(1) DEFAULT 0 COMMENT '0:là chưa chọn,\r\n1: là nam,\r\n2: là nữ\r\n3: giới tính khác',
-  `create` varchar(100) COLLATE utf8_unicode_ci DEFAULT current_timestamp()
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `phone`, `email`, `address`, `info`, `list_product_open`, `rank`, `role`, `coin`, `password`, `status_user`, `avatar`, `gender`, `create`) VALUES
+INSERT INTO `user` (`id`, `name`, `phone`, `email`, `address`, `info`, `list_product_open`, `rank`, `role`, `coin`, `password`, `status_user`, `avatar`, `gender`, `created`) VALUES
 (19, 'Lê Văn Mong ', '0374668113', 'admin@utt.com', 'Thanh Hóa ', '{\"introduce\":\"<p>L&agrave; một trong giảng vi&ecirc;n ưu t&uacute;&nbsp;&nbsp;</p>\"}', '[39]', 0, 'admin', 0, '123456', 1, '[wBY]-[IC5]-hinh-anh-doraenom-300x300.jpg', 1, '2021-04-22 19:50:32'),
 (36, '', '', '0374668113@gmail.com', '', '{}', '[]', 0, 'user', 0, '123456', 1, '', 0, '2021-07-14 21:27:09'),
 (37, 'Người dùng mới', '0374668113', 'vkvk@gmail.com', '', '{\"introduce\":null}', '[]', 0, 'teacher', 0, '123456', 1, '', 0, '2021-07-14 22:38:16'),
@@ -539,12 +515,6 @@ INSERT INTO `video` (`id`, `name`, `img`, `link_video`, `file_document`, `study_
 --
 -- Chỉ mục cho các bảng đã đổ
 --
-
---
--- Chỉ mục cho bảng `biodata`
---
-ALTER TABLE `biodata`
-  ADD PRIMARY KEY (`id_biodata`);
 
 --
 -- Chỉ mục cho bảng `cart`
@@ -657,12 +627,6 @@ ALTER TABLE `video`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
-
---
--- AUTO_INCREMENT cho bảng `biodata`
---
-ALTER TABLE `biodata`
-  MODIFY `id_biodata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `cart`
