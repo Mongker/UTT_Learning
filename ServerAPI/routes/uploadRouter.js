@@ -32,7 +32,8 @@ uploadRouter.post('/upload', imageUploader.single('file'), (req, res) => {
     console.log(processedFile.path);
     // Đổi tên của file vừa upload lên, vì multer đang đặt default ko có đuôi file
     // const newFullPath = `${fullPathInServ}-${orgName}`;
-    const link_img = `${getMaxId()}-${orgName}`;
+    // const link_img = `${getMaxId()}-${orgName}`;
+    const link_img = `${orgName}`;
     const newFullPathUbuntu = pathFolder + link_img; // Ubuntu
     // const newFullPathWin = `images\\`+link_img; // Win 10
     // console.log('newFullPath: '+newFullPathUbuntu);
