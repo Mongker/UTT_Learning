@@ -60,6 +60,7 @@
   "devDependencies": {
     "babel-plugin-styled-components": "^1.13.2",
     "nodemon": "^1.17.4",
+    "postcss": "^8.3.6",
     "redux-devtools-extension": "^2.13.8"
   }
 }
