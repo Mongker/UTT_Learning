@@ -7,7 +7,8 @@
     "dev:server2": "node ./ServerAPI/server.js",
     "dev": "next dev -p 2000",
     "build": "next build",
-    "start": "next start -p 1919",
+    "start:win": "SET NODE_ENV=production & node server.js",
+    "start:linux": "NODE_ENV=production node server.js",
     "install:web": "npm install && npm install ./ServerAPI"
   },
   "dependencies": {
