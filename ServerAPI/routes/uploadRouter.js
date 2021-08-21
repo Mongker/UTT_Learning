@@ -53,7 +53,8 @@ uploadRouter.get('/:name', (req, res) => {
             message: 'no filename specified',
         });
     }
-    res.sendFile(path.resolve(`./ServerAPI/images/${fileName}`));
+    res.set('Cache-control', 'public, max-age=300');
+    res.res.sendFile(path.resolve(`./ServerAPI/images/${fileName}`));
 });
 
 module.exports = uploadRouter;

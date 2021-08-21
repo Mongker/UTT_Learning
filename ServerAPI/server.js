@@ -45,7 +45,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(methodOverride('_method'));
 
 // routing - version 1
-app.use('/biodata', biodataRouter);
 app.use('/api/file', uploadRouter); // Thao tác với dữ liệu người dùng
 app.use(UserRouter);
 app.use(CategoryRouter);
@@ -58,6 +57,7 @@ app.use(OpenProductRouter);
 
 // routing - version 2
 app.use(CategoryRouterVersion2);
+// app.use('/biodata', biodataRouter);
 
 const PORT = 2020;
 // starting server
