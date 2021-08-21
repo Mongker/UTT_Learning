@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
     let dataCache = {};
     const { params } = context;
     const id = params.id.toString();
-    await cache.existsAsync(id).then(async (reply) => {
+    await cache.existsAsync(`${id}_detail`).then(async (reply) => {
         if (reply !== 1) {
             console.log('reply', reply); // MongLV log fix bug
             // cache miss, need to fetch
@@ -45,11 +45,9 @@ export async function getServerSideProps(context) {
             });
             await cache.set(id, JSON.stringify(data), 'EX', 60); // 60s
             dataCache = data;
-            console.log('dataCache 1:', dataCache); // MongLV log fix bug
         } else {
             // cache hit, will get data from redis
             dataCache = JSON.parse(await cache.getAsync(id));
-            console.log('dataCache 2:', dataCache); // MongLV log fix bug
         }
     });
     return { props: { ...dataCache[0] } };
