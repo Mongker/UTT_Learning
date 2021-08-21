@@ -5,8 +5,9 @@
   "scripts": {
     "dev:server": "nodemon ./ServerAPI/server.js",
     "dev:server2": "node ./ServerAPI/server.js",
-    "dev": "next dev -p 2000",
+    "dev": "next dev -p 3000",
     "build": "next build",
+    "start":"next start -p 3000",
     "start:win": "SET NODE_ENV=production & node server.js",
     "start:linux": "NODE_ENV=production node server.js",
     "install:web": "npm install && npm install ./ServerAPI"
@@ -21,6 +22,7 @@
     "axios": "^0.21.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
+    "build": "^0.1.4",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "cors": "^2.8.5",
