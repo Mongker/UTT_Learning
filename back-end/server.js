@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // include router version 1
-const biodataRouter = require('./routes/biodataRouter');
 const uploadRouter = require('./routes/uploadRouter');
 const UserRouter = require('./routes/userRouter');
 const CategoryRouter = require('./routes/categoryRouter');
@@ -36,9 +35,6 @@ const corsOptions = {
     optionsSuccessStatus: 200,
 };
 // app.use(cors(corsOptions));
-// parsing body request
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));

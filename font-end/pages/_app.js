@@ -1,7 +1,7 @@
 import { wrapper } from 'redux/store';
 import React, { useEffect, useState } from 'react';
 // import * as gtag from '../lib/gtag';
-import 'antd/dist/antd.css';
+// import '../styles/antd-custom.less';
 import '../styles/index.css';
 import '../styles/base.css';
 import '../styles/header.css';

@@ -9,9 +9,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 
 // Component
-import ContentUNICAView from './UNICA/ContentUNICAView';
+const ContentUNICAView = dynamic(() => import('./UNICA/ContentUNICAView'))
 
 // Util
 import TypesConfig from 'util/TypesConfig';
@@ -19,10 +20,6 @@ import TypesConfig from 'util/TypesConfig';
 function ContentController({ ContentType }) {
     let ContentComponent;
     switch (ContentType) {
-        // Note 2: Fix tạm để tạo nhiều dự án setting
-        case TypesConfig.UNICA:
-            ContentComponent = <ContentUNICAView />;
-            break;
         default:
             ContentComponent = <ContentUNICAView />;
             break;
