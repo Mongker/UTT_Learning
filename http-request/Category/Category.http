@@ -1,0 +1,17 @@
+#Thêm category
+POST http://103.81.84.214:2020/api/category
+Content-Type: application/json
+
+{
+  "rootId": "1",
+  "status": "1",
+  "name": "mong209",
+  "description": "1111",
+  "icon": "",
+  "sort_order": "1"
+}
+
+###
+#Lấy dữ liệu category về
+GET http://103.81.84.214:2020/api/category-v2
+Accept: application/json
