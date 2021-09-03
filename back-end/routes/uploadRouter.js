@@ -54,7 +54,7 @@ uploadRouter.get('/:name', (req, res) => {
         });
     }
     res.set('Cache-control', 'public, max-age=300');
-    return res.sendFile(path.resolve(`images/${fileName}`));
+    return res.sendFile(path.resolve(`./images/${fileName}`));
 });
 
 module.exports = uploadRouter;
