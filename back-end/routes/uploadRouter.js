@@ -37,7 +37,7 @@ uploadRouter.post('/upload', imageUploader.single('file'), (req, res) => {
     // const newFullPathWin = `images\\`+link_img; // Win 10
     // console.log('newFullPath: '+newFullPathUbuntu);
     fs.renameSync(fullPathInServ, newFullPathUbuntu);
-    res.send({
+    return res.send({
         status: true,
         message: 'file uploaded',
         fileNameInServer: link_img,
@@ -54,7 +54,7 @@ uploadRouter.get('/:name', (req, res) => {
         });
     }
     res.set('Cache-control', 'public, max-age=300');
-    res.res.sendFile(path.resolve(`./images/${fileName}`));
+    return res.sendFile(path.resolve(`images/${fileName}`));
 });
 
 module.exports = uploadRouter;
