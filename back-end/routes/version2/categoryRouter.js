@@ -11,13 +11,13 @@ const express = require('express');
 const CategoryRouter = express.Router();
 
 // middleware
-const { isAuth } = require('../../middleware/auth.middleware');
+// const { isAuth } = require('../../middleware/auth.middleware');
 
 // container
 const { GET_LIST } = require('../../controller/version2/category.controller');
 
 const path = '/api/category-v2';
-CategoryRouter.use(isAuth);
+// CategoryRouter.use(isAuth);
 CategoryRouter.route(path).get(GET_LIST);
 
 module.exports = CategoryRouter;
