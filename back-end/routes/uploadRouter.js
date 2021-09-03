@@ -21,7 +21,7 @@ function getMaxId() {
     }
     return `[${max}]`;
 }
-const pathFolder = 'ServerAPI/images/';
+const pathFolder = 'images/';
 const imageUploader = multer({ dest: pathFolder });
 uploadRouter.post('/upload', imageUploader.single('file'), (req, res) => {
     const processedFile = req.file || {}; // MULTER xử lý và gắn đối tượng FILE vào req
@@ -54,7 +54,7 @@ uploadRouter.get('/:name', (req, res) => {
         });
     }
     res.set('Cache-control', 'public, max-age=300');
-    res.res.sendFile(path.resolve(`./ServerAPI/images/${fileName}`));
+    res.res.sendFile(path.resolve(`./images/${fileName}`));
 });
 
 module.exports = uploadRouter;
