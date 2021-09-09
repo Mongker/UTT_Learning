@@ -8,6 +8,7 @@
  */
 
 const jwtHelper = require('../helpers/jwt.helper');
+const UserModel = require('../model/user.model');
 // const debug = console.log.bind(console);
 
 // Biến cục bộ trên server này sẽ lưu trữ tạm danh sách token
@@ -31,12 +32,28 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
  */
 const login = async (req, res) => {
     try {
-        // console.log(
-        //     `Đang giả lập hành động đăng nhập thành công với Email: ${req.body.email} và Password: ${req.body.password}`,
-        // );
         // Mình sẽ comment mô tả lại một số bước khi làm thực tế cho các bạn như sau nhé:
-        // - Đầu tiên Kiểm tra xem email người dùng đã tồn tại trong hệ thống hay chưa?
-        // - Nếu chưa tồn tại thì reject: User not found.
+        // - Kiểm tra email đã tồn tại trong hệ thống chưa?
+        await UserModel.checkEmail(req.con, req.body, function (err, rows) {
+            console.log('0', 0); // MongLV log fix bug
+            if (err) return res.status(404).json({ message: err });
+            if (rows.length > 0) {
+                const dataUser = rows[0];
+                if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
+                if (dataUser.password === req.body.password) {
+                    let info = {};
+                    try {
+                        info = JSON.parse(dataUser.info);
+                    } catch (e) {}
+                    delete dataUser.info;
+                    const dataNew = { ...dataUser, ...info };
+                    console.log('1', 1); // MongLV log fix bug
+                    return res.status(200).json({ message: 'OK', user: dataNew });
+                } else {
+                    return res.status(200).json({ message: 'Mật khẩu sai' });
+                }
+            } else return res.status(200).json({ message: 'Không tìm thấy Email' });
+        });
         // - Nếu tồn tại user thì sẽ lấy password mà user truyền lên, băm ra và so sánh với mật khẩu của user lưu trong Database
         // - Nếu password sai thì reject: Password is incorrect.
         // - Nếu password đúng thì chúng ta bắt đầu thực hiện tạo mã JWT và gửi về cho người dùng.
@@ -58,8 +75,9 @@ const login = async (req, res) => {
         // lưu ý trong dự án thực tế, nên lưu chỗ khác, có thể lưu vào Redis hoặc DB
         tokenList[refreshToken] = { accessToken, refreshToken };
 
+        console.log('3', 3); // MongLV log fix bug
         // console.log(`Gửi Token và Refresh Token về cho client...`);
-        return res.status(200).json({ accessToken, refreshToken });
+        return await res.status(200).json({ accessToken, refreshToken });
     } catch (error) {
         return res.status(500).json(error);
     }

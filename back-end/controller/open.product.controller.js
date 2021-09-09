@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-const UserModel = require('../model/userModel');
+const UserModel = require('../model/user.model');
 const CartModel = require('../model/cartModel');
 const ProductModel = require('../model/productModel');
 
@@ -50,17 +50,14 @@ module.exports = {
                                                         function (err, data) {
                                                             if (err) return res.status(200).json({ message: err });
                                                             else
-                                                                return res
-                                                                    .status(200)
-                                                                    .json({
-                                                                        message: 'OK',
-                                                                        data: {
-                                                                            ...uses[0],
-                                                                            list_product_open: JSON.stringify(
-                                                                                list_product_open,
-                                                                            ),
-                                                                        },
-                                                                    });
+                                                                return res.status(200).json({
+                                                                    message: 'OK',
+                                                                    data: {
+                                                                        ...uses[0],
+                                                                        list_product_open:
+                                                                            JSON.stringify(list_product_open),
+                                                                    },
+                                                                });
                                                         },
                                                     );
                                                 }
