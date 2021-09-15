@@ -12,7 +12,10 @@ const authorRoutes = express.Router();
 // container
 const { REFRESH_TOKEN, LOGIN } = require('../controller/auth.controller');
 
-authorRoutes.route('/api/login').post(LOGIN);
+// middleware
+const { checkEmail } = require('../middleware/auth.middleware');
+
+authorRoutes.route('/api/login').post(checkEmail, LOGIN);
 authorRoutes.route('/api/refresh-token').post(REFRESH_TOKEN);
 
 module.exports = authorRoutes;

@@ -11,13 +11,14 @@ import axios from 'axios';
 import { url_base } from '../../util/TypeUI';
 const axiosClient = axios.create({
     baseURL: url_base,
-    headers: { 'X-Custom-Header': 'foobar', 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
 });
 //interceptors
 // Add a request interceptors
 axiosClient.interceptors.request.use(
     function (config) {
         // Do something before request is send
+		console.log('123: ', config); // MongLV log fix bug
         return config;
     },
     function (error) {

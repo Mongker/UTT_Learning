@@ -25,6 +25,7 @@ const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE || '3650d';
 // Mã secretKey này phải được bảo mật tuyệt đối, các bạn có thể lưu vào biến môi trường hoặc file
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
 
+
 /**
  * controller login
  * @param {*} req
@@ -32,52 +33,38 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
  */
 const login = async (req, res) => {
     try {
-        // Mình sẽ comment mô tả lại một số bước khi làm thực tế cho các bạn như sau nhé:
-        // - Kiểm tra email đã tồn tại trong hệ thống chưa?
-        await UserModel.checkEmail(req.con, req.body, function (err, rows) {
-            console.log('0', 0); // MongLV log fix bug
-            if (err) return res.status(404).json({ message: err });
-            if (rows.length > 0) {
-                const dataUser = rows[0];
-                if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
-                if (dataUser.password === req.body.password) {
-                    let info = {};
-                    try {
-                        info = JSON.parse(dataUser.info);
-                    } catch (e) {}
-                    delete dataUser.info;
-                    const dataNew = { ...dataUser, ...info };
-                    console.log('1', 1); // MongLV log fix bug
-                    return res.status(200).json({ message: 'OK', user: dataNew });
-                } else {
-                    return res.status(200).json({ message: 'Mật khẩu sai' });
-                }
-            } else return res.status(200).json({ message: 'Không tìm thấy Email' });
-        });
-        // - Nếu tồn tại user thì sẽ lấy password mà user truyền lên, băm ra và so sánh với mật khẩu của user lưu trong Database
-        // - Nếu password sai thì reject: Password is incorrect.
-        // - Nếu password đúng thì chúng ta bắt đầu thực hiện tạo mã JWT và gửi về cho người dùng.
-        // Trong ví dụ demo này mình sẽ coi như tất cả các bước xác thực ở trên đều ok, mình chỉ xử lý phần JWT trở về sau thôi nhé:
-        // console.log(`Thực hiện fake thông tin user...`);
-        const userFakeData = {
-            _id: '1234-5678-910JQK-tqd',
-            name: 'Trung Quân',
-            email: req.body.email,
-        };
+		delete req.user.password;
+
+		let userData = {...req.user}
+		delete userData.introduce;
 
         // console.log(`Thực hiện tạo mã Token, [thời gian sống 1 giờ.]`);
-        const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
+        let accessToken = await jwtHelper.generateToken(userData, accessTokenSecret, accessTokenLife);
 
         // console.log(`Thực hiện tạo mã Refresh Token, [thời gian sống 10 năm] =))`);
-        const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife);
+        let refreshToken = await jwtHelper.generateToken(userData, refreshTokenSecret, refreshTokenLife);
 
         // Lưu lại 2 mã access & Refresh token, với key chính là cái refreshToken để đảm bảo unique và không sợ hacker sửa đổi dữ liệu truyền lên.
         // lưu ý trong dự án thực tế, nên lưu chỗ khác, có thể lưu vào Redis hoặc DB
         tokenList[refreshToken] = { accessToken, refreshToken };
 
-        console.log('3', 3); // MongLV log fix bug
         // console.log(`Gửi Token và Refresh Token về cho client...`);
-        return await res.status(200).json({ accessToken, refreshToken });
+        return await res.status(200).json({
+			message: 200,
+			accessToken, 
+			refreshToken,
+			data: {
+				meId: req.user.id,
+				hasUser: {
+					'root': {
+						itemIds: [req.user.id]
+					}
+				},
+				User: {
+					[req.user.id]: req.user
+				}
+			}
+		});
     } catch (error) {
         return res.status(500).json(error);
     }

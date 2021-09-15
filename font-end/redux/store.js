@@ -17,6 +17,7 @@ export const makeStore = (context) => {
     const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
 
     store.sagaTask = sagaMiddleware.run(rootSaga);
+	console.log('store', store); // MongLV log fix bug
     return store;
 };
 

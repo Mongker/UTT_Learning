@@ -22,6 +22,7 @@ function* watcherGetListUser() {
         }
     }
 }
+
 function* watcherPostUser() {
     while (true) {
         const dataTake = yield take(typeAction.CATEGORY.POST_LOGIC);

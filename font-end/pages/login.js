@@ -12,37 +12,14 @@ import React from 'react';
 import style from 'styles/login.module.css';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
-import axios from 'axios';
 
 // Context
 import ContextApp from '../util/ContextApp';
 
 // Component
 import MetaView from '../components/MetaView';
-import { url_api, url_base } from '../util/TypeUI';
 
-const getLoginUser = async (data, dataUser) => {
-    try {
-        return axios
-            .post(`${url_base}${url_api.USER}/login`, data)
-            .then((res) => res.data)
-            .then((result) => {
-                console.log('result', result); // MongLV log fix bug
-                // dataUser(res.data['user']);
-                if (result.message === 'OK') {
-                    console.log('message', result.message); // MongLV log fix bug
-                    dataUser(result['user']);
-                } else {
-                    message.warning(result.message);
-                }
-            })
-            .catch((error) => message.error('Lỗi đường truyền, kiểm tra lại mạng:', error));
-    } catch (e) {
-        message.error(e);
-    }
-};
-
-function Login(props) {
+function Login() {
     // state
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -62,13 +39,13 @@ function Login(props) {
 
     const handleSave = () => {
         if (email.length > 0 && password.length > 0) {
-            getLoginUser(
-                {
-                    email: email,
-                    password: password,
-                },
-                setUser,
-            );
+            // getLoginUser(
+            //     {
+            //         email: email,
+            //         password: password,
+            //     },
+            //     setUser,
+            // );
         } else message.warn('Không được bỏ trống thông tin');
     };
     const handleSingUp = (e) => {
