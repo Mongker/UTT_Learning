@@ -16,9 +16,7 @@ function convertArrayToItems(array = []) {
                 items[item.id] = item;
             }
         });
-    } catch (e) {
-        console.log('e', e); // MongLV log fix bug
-    }
+    } catch (e) {}
     return items;
 }
 module.exports = convertArrayToItems;

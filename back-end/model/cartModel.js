@@ -19,7 +19,6 @@ module.exports = {
 
     getList: function (con, querySQL, callback) {
         const query = querySQL.length > 0 ? `SELECT * FROM cart WHERE ` + querySQL : `SELECT * FROM cart`;
-        console.log('query', query); // MongLV log fix bug
         con.query(query, callback);
     },
 

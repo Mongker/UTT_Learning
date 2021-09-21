@@ -32,7 +32,6 @@ module.exports = {
             CartModel.create(req.con, querySQL, function (err) {
                 if (err) return res.status(404).json({ message: err });
                 CartModel.getList(req.con, querySQLGet, function (err, row) {
-                    console.log('row', row); // MongLV log fix bug
                     return res.status(200).json({ message: 'OK', data: row[0] });
                 });
             });
@@ -77,10 +76,9 @@ module.exports = {
         } else return res.status(200).json({ message: 'Không có dữ liệu nào được gửi lên' });
     },
     DELETE: function (req, res) {
-        if(req.params.id) {
+        if (req.params.id) {
             CartModel.getList(req.con, `id = ${req.params.id}`, function (err, row) {
                 if (err) return res.status(404).json({ message: err });
-                console.log('row', row[0]); // MongLV log fix bug
                 if (row[0].status === 0) {
                     CartModel.delete(req.con, req.params.id, function (err) {
                         if (err) return res.status(404).json({ message: err });

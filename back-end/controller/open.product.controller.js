@@ -25,7 +25,6 @@ module.exports = {
                         const dataUpdate = row1[0];
                         const mer_list_number = JSON.parse(row1[0].list_number);
                         mer_list_number.push(row[0].user_id);
-                        console.log('mer_list_number', mer_list_number); // MongLV log fix bug
                         const list_number = JSON.stringify(mer_list_number);
 
                         ProductModel.update(
@@ -39,7 +38,6 @@ module.exports = {
                                         if (err) return res.status(200).json({ message: err });
                                         else {
                                             UserModel.getList(req.con, `id = ${row[0].user_id}`, function (err, uses) {
-                                                console.log('uses', uses); // MongLV log fix bug
                                                 if (uses.length === 1 && uses[0]) {
                                                     const list_product_open = JSON.parse(uses[0].list_product_open);
                                                     list_product_open.push(row1[0].id);

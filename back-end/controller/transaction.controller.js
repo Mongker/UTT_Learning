@@ -20,8 +20,6 @@ module.exports = {
             index === 0 ? (querySQL = `${key} = ${value}`) : (querySQL = querySQL + ', ' + `${key} = ${value}`);
         });
 
-        console.log('req.body', req.body); // MongLV log fix bug
-        console.log('req.body.list_cart', req.body.list_cart); // MongLV log fix bug
         const list_cart = req.body.list_cart ? JSON.parse(req.body.list_cart) : [];
         delete req.body.list_cart;
         Object.entries(req.body).map((item, index) => {

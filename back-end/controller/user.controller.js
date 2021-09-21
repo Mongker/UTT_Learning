@@ -63,10 +63,10 @@ const createUser = async (req, res) => {
                 }
             });
         } catch (e) {
-            console.log('e', e); // MongLV log fix bug
+            console.log('e', e);
         }
     } catch (e) {
-        console.log('e', e); // MongLV log fix bug
+        console.log('e', e);
     }
 };
 
@@ -127,7 +127,7 @@ const updateUser = async (req, res) => {
                         }
                     } else return res.status(200).json({ message: 'Lỗi không xác định email' });
                 } catch (e) {
-                    console.log('e', e); // MongLV log fix bug
+                    console.log('e', e);
                 }
             });
         } else {
@@ -139,7 +139,7 @@ const updateUser = async (req, res) => {
             } else return res.status(200).json({ message: 'Không có dữ liệu nào được gửi lên' });
         }
     } catch (e) {
-        console.log('e', e); // MongLV log fix bug
+        console.log('e', e);
     }
 };
 
@@ -171,11 +171,11 @@ const getListUser = (req, res) => {
                     });
                 return res.status(200).json({ message: 'OK', users: rowNew });
             } catch (e) {
-                console.log('e', e); // MongLV log fix bug
+                console.log('e', e);
             }
         });
     } catch (e) {
-        console.log('e', e); // MongLV log fix bug
+        console.log('e', e);
     }
 };
 

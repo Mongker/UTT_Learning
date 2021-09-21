@@ -9,7 +9,6 @@
 module.exports = {
     create: function (con, querySQL, callback) {
         const _query = `INSERT INTO study_program SET ` + querySQL;
-        console.log('_query', _query); // MongLV log fix bug
         con.query(_query, callback);
     },
     update: function (con, id, querySQL, callback) {
@@ -18,9 +17,7 @@ module.exports = {
     },
     getList: function (con, querySQL, callback) {
         const query =
-            querySQL.length > 0
-                ? `SELECT * FROM study_program WHERE ` + querySQL
-                : `SELECT * FROM study_program`;
+            querySQL.length > 0 ? `SELECT * FROM study_program WHERE ` + querySQL : `SELECT * FROM study_program`;
         con.query(query, callback);
     },
     getByName: function (con, name, callback) {
