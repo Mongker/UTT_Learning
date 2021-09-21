@@ -16,7 +16,7 @@ function* workerLogin(email, password, _function) {
     if (typeof email === 'string' && typeof password === 'string' && email.length > 0 && password.length > 0) {
         // const { data, message, auth } = yield baseAPI.add(CONFIG_TYPE_API.LOGIN, email, password);
         const response = yield baseAPI.add(CONFIG_TYPE_API.LOGIN, { email, password });
-        yield fork(workerBaseSagas.workerResponse, response);
+        yield fork(workerBaseSagas.workerResponse, response, _function);
     }
 }
 const workerUserSagas = {

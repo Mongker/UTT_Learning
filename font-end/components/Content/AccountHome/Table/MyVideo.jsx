@@ -25,9 +25,7 @@ function MyVideo() {
         const { list_product_open } = myUser;
 
         list_product_open && (arrMyProduct = JSON.parse(list_product_open));
-    } catch (e) {
-        console.log('e', e); // MongLV log fix bug
-    }
+    } catch (e) {}
     const handleNextPageView = (id) => {
         router.push(`/detail/${id}`);
     };

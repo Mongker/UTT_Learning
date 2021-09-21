@@ -32,7 +32,6 @@ for (let i = 0; i <= 100; i++) {
     dataSale.push(i);
 }
 const ModalProductView = React.forwardRef(({ idCategory }, ref) => {
-    console.log('123', 123); // MongLV log fix bug
     // hooks
     const [form] = Form.useForm();
     const { myUser } = useUserBase();

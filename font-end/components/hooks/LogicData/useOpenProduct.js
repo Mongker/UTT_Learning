@@ -49,10 +49,6 @@ function useOpenProduct() {
             // Update chính bản thân mình
             if (data.id === Number(myUser.id)) {
                 setLocalStore({ ...myUser, ...data });
-                console.log('myUser', myUser); // MongLV log fix bug
-                console.log('data', data); // MongLV log fix bug
-                console.log('xxxx', { ...myUser, ...data }); // MongLV log fix bug
-                debugger; // MongLV
                 setUser({ ...myUser, ...data });
             }
             messageAnt.success('Cập nhật thành công');

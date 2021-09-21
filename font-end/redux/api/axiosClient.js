@@ -11,7 +11,15 @@ import axios from 'axios';
 import { url_base } from '../../util/TypeUI';
 const axiosClient = axios.create({
     baseURL: url_base,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+        'Content-Type': 'application/json',
+        'x-access-token':
+            (typeof window !== 'undefined' &&
+                window &&
+                window.localStorage &&
+                window.localStorage.getItem('accessToken')) ||
+            '',
+    },
 });
 //interceptors
 // Add a request interceptors

@@ -15,7 +15,6 @@ const hasUserReducer = {};
 
 hasUserReducer.path = CONFIG_STORE.HasUser;
 hasUserReducer.value = (HasUser = fromJS({}), action) => {
-    console.log('action', action); // MongLV log fix bug
     switch (action.type) {
         case `${hasUserReducer.path}_${CONFIG_TYPE_ACTION.STORE.MERGE}`:
             return HasUser.merge(fromJS(action.merge));

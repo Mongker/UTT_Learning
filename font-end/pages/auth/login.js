@@ -38,8 +38,12 @@ function Login() {
         setPassword(e.target.value);
     };
 
+    const funcSuccess = () => {
+        console.log('router', router); // MongLV log fix bug
+        router.push('/');
+    };
     const handleSave = () => {
-        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: 'admin@utt.com', password: '123456' });
+        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: 'admin@utt.com', password: '123456' }, funcSuccess);
         // if (email.length > 0 && password.length > 0) {
         // Code ở đây
         // } else message.warn('Không được bỏ trống thông tin');

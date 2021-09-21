@@ -58,7 +58,6 @@ function InfoMyUser() {
         }
     }, [myUser]);
 
-    console.log('myUser', myUser); // MongLV log fix bug
     return (
         <div className={style.content_main_user}>
             <div className={style.container}>

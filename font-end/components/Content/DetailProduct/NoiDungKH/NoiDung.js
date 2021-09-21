@@ -25,7 +25,6 @@ function NoiDung({ product_id, onChangeCollapse, isButton, onChangeVideo, idVide
 
     // handle func
     const showModal = (item) => {
-        console.log('item', item); // MongLV log fix bug
         setIsModalVisible(true);
         setItemStartVideo(item);
     };
@@ -66,7 +65,7 @@ function NoiDung({ product_id, onChangeCollapse, isButton, onChangeVideo, idVide
                 bordered={false}
                 expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
                 className={style.site_collapse_custom_collapse}
-            // onChange={onChangeCollapse}
+                // onChange={onChangeCollapse}
             >
                 {arrStudyProgramFilter.map((item) => (
                     <Panel
@@ -153,8 +152,8 @@ NoiDung.propTypes = {
 };
 
 NoiDung.defaultProps = {
-    onChangeCollapse: () => { },
-    onChangeVideo: () => { },
+    onChangeCollapse: () => {},
+    onChangeVideo: () => {},
     isButton: true,
 };
 

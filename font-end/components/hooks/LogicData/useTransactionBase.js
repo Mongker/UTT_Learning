@@ -39,10 +39,8 @@ function useTransactionBase() {
     const postTransaction = async (obj = {}, callBack = () => {}) => {
         const { message, data } = await baseAPI.add(url_api.TRANSACTION, obj);
         if (message === 'OK') {
-            console.log('data', data); // MongLV log fix bug
             transaction.push(data);
             const dataNew = stringToArr(transaction, 'list_cart');
-            console.log('dataNew', dataNew); // MongLV log fix bug
             dispatch({
                 type: typeAction.TRANSACTION.POST,
                 payload: { data: [...dataNew] },

@@ -66,9 +66,7 @@ function ContentThanhToan(props) {
         values['amount'] = sum;
         try {
             values['list_cart'] = JSON.stringify(list_cart);
-        } catch (e) {
-            console.log('e', e); // MongLV log fix bug
-        }
+        } catch (e) {}
 
         debugger; // MongLV
         values['user_id'] = Number(myUser.id);
