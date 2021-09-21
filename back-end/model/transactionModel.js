@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 present, Đào Thị Thanh Mai.
+ * Copyright 2020 present,Lê Văn Mong.
  * All rights reserved.
  * @author Mongker on 11/05/2021
  * @email: monglv36@gmail.com
@@ -17,10 +17,7 @@ module.exports = {
         con.query(query, callback);
     },
     getList: function (con, querySQL, callback) {
-        const query =
-            querySQL.length > 0
-                ? `SELECT * FROM transaction WHERE ` + querySQL
-                : `SELECT * FROM transaction`;
+        const query = querySQL.length > 0 ? `SELECT * FROM transaction WHERE ` + querySQL : `SELECT * FROM transaction`;
         con.query(query, callback);
     },
     delete: function (con, id, callback) {

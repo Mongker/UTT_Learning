@@ -13,19 +13,20 @@ import style from 'styles/login.module.css';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
 
-// Context
-import ContextApp from '../util/ContextApp';
-
 // Component
-import MetaView from '../components/MetaView';
+import MetaView from '../../components/MetaView';
+
+// hooks
+import useDispatchUtil from 'hooks/useDispatchUtil';
+import CONFIG_TYPE_ACTION from '../../config/configTypeAction';
 
 function Login() {
     // state
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    // context
-    const { user, setUser } = React.useContext(ContextApp);
+    // hooks
+    const dispatchUtil = useDispatchUtil();
 
     const router = useRouter();
 
@@ -38,23 +39,18 @@ function Login() {
     };
 
     const handleSave = () => {
-        if (email.length > 0 && password.length > 0) {
-            // getLoginUser(
-            //     {
-            //         email: email,
-            //         password: password,
-            //     },
-            //     setUser,
-            // );
-        } else message.warn('Không được bỏ trống thông tin');
+        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: 'admin@utt.com', password: '123456' });
+        // if (email.length > 0 && password.length > 0) {
+        // Code ở đây
+        // } else message.warn('Không được bỏ trống thông tin');
     };
     const handleSingUp = (e) => {
         e.preventDefault();
         router.push('/singup');
     };
-    React.useEffect(() => {
-        user && router.push('/');
-    }, [user]);
+    // React.useEffect(() => {
+    //     user && router.push('/');
+    // }, [user]);
     return (
         <React.Fragment>
             <MetaView title={'Login - Unica'} />

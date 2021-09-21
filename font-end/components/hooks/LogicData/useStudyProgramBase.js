@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { message as messageAnt } from 'antd';
 import baseAPI from 'redux/api/baseAPI';
 import typeAction from 'redux/actions/typeAction';
-import ContextApp from 'util/ContextApp';
+import ContextApp from 'util/context/ContextApp';
 import { typeStore, url_api } from 'util/TypeUI';
 
 // import PropTypes from 'prop-types';
@@ -31,8 +31,7 @@ function useStudyProgramBase() {
     const studyProgram = useSelector((store) => store[typeStore.STUDY_PROGRAM]);
     const dispatch = useDispatch();
     let studyProgramObj = {};
-    studyProgram.length > 0 &&
-        studyProgram.map((item) => (studyProgramObj[item.id] = item));
+    studyProgram.length > 0 && studyProgram.map((item) => (studyProgramObj[item.id] = item));
 
     // handle func
     // handle func

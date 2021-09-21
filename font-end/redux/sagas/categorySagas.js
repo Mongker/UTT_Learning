@@ -26,7 +26,6 @@ function* watcherGetCategory() {
 function* watcherPostCategory() {
     while (true) {
         const dataTake = yield take(typeAction.CATEGORY.POST_LOGIC);
-        debugger; // MongLV
         const { data } = dataTake.payload;
         const { item, message } = yield categoryAPI.add(data);
         if (message === 'OK' && item) {

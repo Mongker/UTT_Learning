@@ -15,7 +15,7 @@ import { Avatar, Dropdown, Menu, Input } from 'antd';
 
 // Util
 import { TYPE_MENU } from 'util/TypeMenu';
-import ContextApp from 'util/ContextApp';
+import ContextApp from 'util/context/ContextApp';
 
 // styles
 import styles from './styles/index.module.scss';
@@ -59,7 +59,7 @@ function HeaderView({ activeMenu }) {
         event.key === 'LOGOUT' && handleLogOut();
     };
 
-    const onSearch = value => {
+    const onSearch = (value) => {
         console.log(value);
         setTextSearch(value);
     };
@@ -76,7 +76,9 @@ function HeaderView({ activeMenu }) {
     );
     return (
         <React.Fragment>
-            <div className={styles.search}><Search placeholder={'Tìm kiếm nhanh'} onSearch={onSearch} enterButton /></div>
+            <div className={styles.search}>
+                <Search placeholder={'Tìm kiếm nhanh'} onSearch={onSearch} enterButton />
+            </div>
             <div className={styles.controller}>
                 <div className={styles.title}>{text}</div>
                 <div style={{ width: '70%' }} />

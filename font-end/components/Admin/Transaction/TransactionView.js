@@ -19,7 +19,7 @@ import { url_base_img } from '../../../util/TypeUI';
 // style
 import styles from './styles/index.module.scss';
 import { UserOutlined } from '@ant-design/icons';
-import ContextApp from '../../../util/ContextApp';
+import ContextApp from '../../../util/context/ContextApp';
 import convertDateVN from '../../../util/convertDateVN';
 
 // const

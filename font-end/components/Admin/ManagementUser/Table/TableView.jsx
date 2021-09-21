@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 // hooks
 import useColumns from '../../../hooks/useColumns';
 import useUserBase from '../../../hooks/LogicData/useUserBase';
-import ContextApp from '../../../../util/ContextApp';
+import ContextApp from '../../../../util/context/ContextApp';
 
 const funcDefault = () => {};
 function TableView({ handleDidMount, actionDelete, columnsTable, type, handleEdit }) {

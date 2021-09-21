@@ -26,7 +26,6 @@ function* watcherGetListUser() {
 function* watcherPostUser() {
     while (true) {
         const dataTake = yield take(typeAction.CATEGORY.POST_LOGIC);
-        debugger; // MongLV
         const { data } = dataTake.payload;
         const { item, message } = yield categoryAPI.add(data);
         if (message === 'OK' && item) {
@@ -65,7 +64,6 @@ function* watcherPutUser() {
 function* watcherDeleteUser() {
     while (true) {
         const dataTake = yield take(typeAction.CATEGORY.DEL_LOGIC);
-
         const { id } = dataTake.payload;
         const { message } = yield categoryAPI.delete(id);
 

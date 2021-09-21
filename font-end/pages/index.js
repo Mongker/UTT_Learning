@@ -15,21 +15,22 @@ import dynamic from 'next/dynamic';
 import MetaView from '../components/MetaView';
 
 // const component
-const HeaderController = dynamic(() => import('../components/Header/HeaderController'), { loading: () => <p>...</p> });
-const ContentController = dynamic(() => import('../components/Content/ContentController'), {
-    loading: () => <p>...</p>,
-});
-const Footer = dynamic(() => import('../components/Footer/Footer'), { loading: () => <p>...</p> });
+// const HeaderController = dynamic(() => import('../components/Header/HeaderController'), { loading: () => <p>...</p> });
+// const ContentController = dynamic(() => import('../components/Content/ContentController'), {
+//     loading: () => <p>...</p>,
+// });
+// const Footer = dynamic(() => import('../components/Footer/Footer'), { loading: () => <p>...</p> });
 
 // icon
 function Index(props) {
-    const { dataMeta } = props;
+    // const { dataMeta } = props;
     return (
         <React.Fragment>
-            <MetaView {...dataMeta} />
-            <HeaderController />
-            <ContentController />
-            <Footer />
+            {/*<MetaView {...dataMeta} />*/}
+            {/*<HeaderController />*/}
+            {/*<ContentController />*/}
+            {/*<Footer />*/}
+            1111
         </React.Fragment>
     );
 }

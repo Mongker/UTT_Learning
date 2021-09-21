@@ -22,7 +22,7 @@ import typeAction from 'redux/actions/typeAction';
 import { message as messageAnt } from 'antd';
 import useUserBase from './useUserBase';
 import { useDispatch } from 'react-redux';
-import ContextApp from '../../../util/ContextApp';
+import ContextApp from '../../../util/context/ContextApp';
 // import PropTypes from 'prop-types';
 const setLocalStore = (myUser) => {
     myUser &&

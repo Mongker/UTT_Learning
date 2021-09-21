@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 present, Đào Thị Thanh Mai.
+ * Copyright 2020 present,Lê Văn Mong.
  * All rights reserved.
  * @author Mongker on 03/09/2021
  * @email: monglv36@gmail.com
@@ -10,12 +10,13 @@ const express = require('express');
 const authorRoutes = express.Router();
 
 // container
-const { REFRESH_TOKEN, LOGIN } = require('../controller/auth.controller');
+const refreshToken = require('../controller/auth/refreshToken.controller');
+const login = require('../controller/auth/login.controller');
 
 // middleware
-const { checkEmail } = require('../middleware/auth.middleware');
+const checkEmail = require('../middleware/checkEmail.middleware');
 
-authorRoutes.route('/api/login').post(checkEmail, LOGIN);
-authorRoutes.route('/api/refresh-token').post(REFRESH_TOKEN);
+authorRoutes.route('/api/login').post(checkEmail, login);
+authorRoutes.route('/api/refresh-token').post(refreshToken);
 
 module.exports = authorRoutes;

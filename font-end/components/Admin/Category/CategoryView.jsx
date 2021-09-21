@@ -24,7 +24,7 @@ import TitleTreeView from './TitleTree/TitleTreeView';
 import { url_base_img } from '../../../util/TypeUI';
 import ProductView from '../Product/ProductView';
 import useCategoryBase from '../../hooks/LogicData/useCategoryBase';
-import ContextApp from '../../../util/ContextApp';
+import ContextApp from '../../../util/context/ContextApp';
 
 const CategoryView = ({ refModalProduct }) => {
     // redux

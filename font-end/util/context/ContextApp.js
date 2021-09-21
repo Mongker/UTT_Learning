@@ -8,7 +8,5 @@
  */
 import { createContext } from 'react';
 
-const ContextApp = createContext({
-    user: null,
-});
+const ContextApp = createContext({});
 export default ContextApp;

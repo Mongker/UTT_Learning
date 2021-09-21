@@ -1,8 +1,8 @@
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
-import { rootReducer } from './reducers/rootReducers';
-import rootSaga from './sagas/rootSaga';
+import { rootReducer } from './reducers';
+import rootSaga from './sagas';
 
 const bindMiddleware = (middleware) => {
     if (process.env.NODE_ENV !== 'production') {
@@ -13,11 +13,11 @@ const bindMiddleware = (middleware) => {
 };
 
 export const makeStore = (context) => {
+    // console.log('context', context); // MongLV log fix bug
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
 
     store.sagaTask = sagaMiddleware.run(rootSaga);
-	console.log('store', store); // MongLV log fix bug
     return store;
 };
 

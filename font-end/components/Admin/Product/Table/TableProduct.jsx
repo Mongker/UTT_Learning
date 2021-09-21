@@ -18,7 +18,7 @@ import useColumns from '../../../hooks/useColumns';
 // Util
 import { typeStore } from 'util/TypeUI';
 import useCategoryBase from '../../../hooks/LogicData/useCategoryBase';
-import ContextApp from '../../../../util/ContextApp';
+import ContextApp from '../../../../util/context/ContextApp';
 import useUserBase from '../../../hooks/LogicData/useUserBase';
 
 // style
@@ -28,7 +28,7 @@ const funcDefault = () => {};
 function TableProduct({ columnsTable, type, actionProduct, isFullWidth }) {
     // hooks
     const { category } = useCategoryBase();
-    const {usersObj} = useUserBase()
+    const { usersObj } = useUserBase();
     const { textSearch } = useContext(ContextApp);
 
     // handle func
@@ -37,8 +37,9 @@ function TableProduct({ columnsTable, type, actionProduct, isFullWidth }) {
             return arr.filter(
                 (item) =>
                     item.name.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1 ||
-                    `${item.price}`.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1 || usersObj[item.author_id].name.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1 ||
-                    usersObj[item.author_id].email.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1
+                    `${item.price}`.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1 ||
+                    usersObj[item.author_id].name.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1 ||
+                    usersObj[item.author_id].email.toLowerCase().indexOf(textSearch.toLowerCase()) !== -1,
             );
         else return arr;
     };

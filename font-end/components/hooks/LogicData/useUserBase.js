@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { message as messageAnt } from 'antd';
 import baseAPI from 'redux/api/baseAPI';
 import typeAction from 'redux/actions/typeAction';
-import ContextApp from 'util/ContextApp';
+import ContextApp from 'util/context/ContextApp';
 import { typeStore, url_api } from 'util/TypeUI';
 
 // import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ function useUserBase() {
                 payload: { users: [...newData] },
             });
             messageAnt.success('Cập nhật thành công');
-            callback()
+            callback();
         } else messageAnt.warn(message);
 
         // Update chính bản thân mình

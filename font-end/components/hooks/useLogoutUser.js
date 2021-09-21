@@ -13,7 +13,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 // Context
-import ContextApp from 'util/ContextApp';
+import ContextApp from 'util/context/ContextApp';
 
 function UseLogoutUser() {
     const router = useRouter();
