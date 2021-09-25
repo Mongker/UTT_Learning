@@ -11,14 +11,14 @@ import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 
-function MetaView({ title, description, url, image, icon, name }) {
+function MetaView({ title, description, url, image, name }) {
     return (
         <Head>
             <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
             <title>{title}</title>
             <meta name='description' content={description} />
             <meta name='robots' content='index, follow' />
-            <link rel='icon' href={icon} />
+            {/*<link rel='icon' href={icon} />*/}
             <meta name='author' content={name} />
             <meta name='keywords' content={description} />
 
@@ -47,13 +47,12 @@ MetaView.propTypes = {
 };
 
 MetaView.defaultProps = {
-    image: 'https://static.unica.vn/media/images/unica-hoctuchuyengia.jpg',
-    title: 'UTT Learning - Học online cùng chuyên gia',
-    name: 'Mongker',
+    image: 'https://lh3.googleusercontent.com/pw/AM-JKLX2mqJxUamKVpFDtQ8OBQorVDEfRmYPpqsYBlXkwze6z2vX66YnaI120jXMaECJQOdRPbSVWCiTdqk7orVAYeVY5PxL5mhKFr3UcMREsiZsMTJ4xD-sYNs8opX7m6bCsyWOwkE-499EvhnsbcJUIvvJ=w653-h399-no?authuser=0',
+    title: 'Tổng kho gỗ Hoàng Gia Start',
+    name: 'Hoàng Gia Start',
     description:
-        'UTT Learning - Hệ thống khóa học trực tuyến dành cho người đi làm với hơn 500.000 học viên đang theo học và 2.000 khóa học từ chuyên gia hàng đầu mọi lĩnh vực',
-    icon: 'https://static.unica.vn/icon/favicon.ico',
-    url: 'https://unica.vercel.app/',
+        'Tổng kho gỗ Hoàng Gia Start chuyên phân phối số lượng lớn các sản phẩm gỗ công nghiệp, gỗ nhân tạo, tấm Cemboard, … tại Thanh Hóa, Nghệ An, Ninh Bình, Hà Nội và các tỉnh miền bắc với giá bán sỉ đến trực tiếp tay người tiêu dùng, hàng đảm bảo chất lượng, hàng tồn kho luôn đầy đủ cung cấp cho khách hàng.',
+    url: 'https://hoanggiastart.com',
 };
 
 export default MetaView;
