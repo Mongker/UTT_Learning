@@ -47,7 +47,7 @@ MetaView.propTypes = {
 };
 
 MetaView.defaultProps = {
-    image: 'https://photos.app.goo.gl/LrXPXRAgF1CpcpiUA',
+    image: 'https://lh3.googleusercontent.com/pw/AM-JKLX2mqJxUamKVpFDtQ8OBQorVDEfRmYPpqsYBlXkwze6z2vX66YnaI120jXMaECJQOdRPbSVWCiTdqk7orVAYeVY5PxL5mhKFr3UcMREsiZsMTJ4xD-sYNs8opX7m6bCsyWOwkE-499EvhnsbcJUIvvJ=w653-h399-no?authuser=0',
     title: 'Tổng kho gỗ Hoàng Gia Start',
     name: 'Hoàng Gia Start',
     description:
