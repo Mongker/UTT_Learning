@@ -10,22 +10,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
 
 // Component
-import MetaView from '../components/MetaView';
+import MetaView from 'components/MetaView';
+import FooterApp from 'components/FooterFolder/Footer';
 
-const { Header, Footer, Content } = Layout;
+// const
+const { Header, Content } = Layout;
+const RingPhone = dynamic(() => import('components/RingPhoneFolder/RingPhone'));
 
 // icon
 function Index() {
     return (
-        <Layout>
-            <MetaView />
-            <Header>Header</Header>
-            <Content>Content</Content>
-            <Footer>Footer</Footer>
-        </Layout>
+        <React.Fragment>
+            <RingPhone />
+            <Layout>
+                <MetaView />
+                <Header>Header</Header>
+                <Content />
+                <FooterApp />
+            </Layout>
+        </React.Fragment>
     );
 }
 

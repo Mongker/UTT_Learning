@@ -1,6 +1,14 @@
 /**
  * Copyright 2020 present, Lê Văn Mong.
  * All rights reserved.
+ * @author Mongker on 25/09/2021
+ * @email: monglv36@gmail.com
+ * @student_code: 68DCHT20091
+ * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
+ */
+/**
+ * Copyright 2020 present, Lê Văn Mong.
+ * All rights reserved.
  * @author Mongker on 24/11/2020
  * @email: levanmong.dola.99@gmail.com
  * @student-code: 68DCHT20091
@@ -48,11 +56,14 @@ MetaView.propTypes = {
 };
 
 MetaView.defaultProps = {
-    image: 'https://i.im.ge/2021/09/25/TcDhGP.jpg',
-    title: 'Tổng kho gỗ Hoàng Gia Start',
+    image: 'https://i.im.ge/2021/09/26/TgeE9Y.jpg',
+    title: 'Tổng kho gỗ | Hoàng Gia Start',
     name: 'Hoàng Gia Start',
     description:
-        'Tổng kho gỗ Hoàng Gia Start chuyên phân phối số lượng lớn các sản phẩm gỗ công nghiệp, gỗ nhân tạo, tấm Cemboard, … tại Thanh Hóa, Nghệ An, Ninh Bình, Hà Nội và các tỉnh miền bắc với giá bán sỉ đến trực tiếp tay người tiêu dùng, hàng đảm bảo chất lượng, hàng tồn kho luôn đầy đủ cung cấp cho khách hàng.',
+        'Tổng kho gỗ Hoàng Gia Start chuyên phân phối số lượng lớn các sản phẩm gỗ công nghiệp, gỗ nhân tạo, tấm Cemboard,\n' +
+        '… tại khu vực Thanh Hóa, Nghệ An, Hà Nội, Hải Phòng, Hải Dương, Ninh Bình, Huế, Hưng Yên và các tỉnh\n' +
+        'miền bắc - trung - nam với giá bán sỉ đến trực tiếp tay người tiêu dùng, hàng đảm bảo chất\n' +
+        'lượng, hàng tồn kho luôn đầy đủ cung cấp cho khách hàng.',
     url: 'https://hoanggiastart.com',
 };
 
