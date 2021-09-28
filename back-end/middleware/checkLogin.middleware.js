@@ -8,6 +8,7 @@
  */
 
 const UserModel = require('../model/user.model');
+const md5 = require('md5');
 
 /**
  * checkEmail: Kiểm tra xem thông tin đăng nhập
@@ -19,13 +20,13 @@ const UserModel = require('../model/user.model');
  * @param next
  * @returns {Promise<void>}
  */
-const checkEmail = async (req, res, next) => {
+const checkLogin = async (req, res, next) => {
     await UserModel.checkEmail(req.con, req.body, (err, rows) => {
         if (err) return res.status(404).json({ message: err });
         if (rows.length > 0) {
             const dataUser = rows[0];
             if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
-            if (dataUser.password === req.body.password) {
+            if (dataUser.password === md5(req.body.password)) {
                 let info = {};
                 try {
                     info = JSON.parse(dataUser.info);
@@ -40,4 +41,4 @@ const checkEmail = async (req, res, next) => {
     });
 };
 
-module.exports = checkEmail;
+module.exports = checkLogin;

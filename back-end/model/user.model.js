@@ -25,19 +25,19 @@ module.exports = {
     },
 
     create: (con, data, callback) => {
-        const query = `INSERT INTO user SET name = '${data.name}', 
+        const query = `INSERT INTO user SET name = '', 
                 phone = '${data.phone}', 
                 email = '${data.email}', 
-                address = '${data.address}',
-                info = '${data.info}', 
-                role = '${data.role}', 
-                coin = '${data.coin}', 
                 password = '${data.password}', 
-                status_user = '${data.status_user}',
-                rank = '0',
-                avatar = '',
+                address = '',
+                info = '{}', 
+                role = 'user', 
+                coin = '0',
+                status_user = '1',
+                position='Người dùng',
                 list_product_open = '[]'
                 `;
+        console.log('query', query); // MongLV log fix bug
         con.query(query, callback);
     },
     update: (con, id, querySQL, callback) => {
