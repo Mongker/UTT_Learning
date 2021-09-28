@@ -37,7 +37,6 @@ module.exports = {
                 position='Người dùng',
                 list_product_open = '[]'
                 `;
-        console.log('query', query); // MongLV log fix bug
         con.query(query, callback);
     },
     update: (con, id, querySQL, callback) => {

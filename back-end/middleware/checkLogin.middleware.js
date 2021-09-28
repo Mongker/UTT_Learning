@@ -21,24 +21,46 @@ const md5 = require('md5');
  * @returns {Promise<void>}
  */
 const checkLogin = async (req, res, next) => {
-    await UserModel.checkEmail(req.con, req.body, (err, rows) => {
-        if (err) return res.status(404).json({ message: err });
-        if (rows.length > 0) {
-            const dataUser = rows[0];
-            if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
-            if (dataUser.password === md5(req.body.password)) {
-                let info = {};
-                try {
-                    info = JSON.parse(dataUser.info);
-                } catch (e) {}
-                delete dataUser.info;
-                req.user = { ...dataUser, ...info };
-                next();
-            } else {
-                return res.status(200).json({ message: 'Mật khẩu sai' });
-            }
-        } else return res.status(200).json({ message: 'Không tìm thấy Email' });
-    });
+	if(req.body.email) {
+		await UserModel.checkEmail(req.con, req.body, (err, rows) => {
+			if (err) return res.status(404).json({ message: err });
+			if (Array.isArray(rows) && rows.length > 0) {
+				const dataUser = rows[0];
+				if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
+				if (dataUser.password === md5(req.body.password)) {
+					let info = {};
+					try {
+						info = JSON.parse(dataUser.info);
+					} catch (e) {}
+					delete dataUser.info;
+					req.user = { ...dataUser, ...info };
+					next();
+				} else {
+					return res.json({ message: 403 });
+				}
+			} else return res.json({ message: 204 });
+		});
+	} else if (req.body.phone) {
+		await req.body.phone && UserModel.checkPhone(req.con, req.body, (err, rows) => {
+			if (err) return res.status(404).json({ message: err });
+			if (Array.isArray(rows) && rows.length > 0) {
+				const dataUser = rows[0];
+				if (dataUser.status_user === 0) return res.status(200).json({ message: 'Tài khoản đã bị khóa' });
+				if (dataUser.password === md5(req.body.password)) {
+					let info = {};
+					try {
+						info = JSON.parse(dataUser.info);
+					} catch (e) {}
+					delete dataUser.info;
+					req.user = { ...dataUser, ...info };
+					next();
+				} else {
+					return res.json({ message: 403 });
+				}
+			} else return res.json({ message: 204 });
+		});
+	}
+	
 };
 
 module.exports = checkLogin;

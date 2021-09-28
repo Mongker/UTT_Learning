@@ -13,7 +13,6 @@ const bindMiddleware = (middleware) => {
 };
 
 export const makeStore = (context) => {
-    // console.log('context', context); // MongLV log fix bug
     const sagaMiddleware = createSagaMiddleware();
     const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]));
 

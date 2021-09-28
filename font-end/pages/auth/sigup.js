@@ -9,7 +9,7 @@
 
 import React from 'react';
 // import PropTypes from 'prop-types';
-import style from 'styles/login.module.css';
+import style from 'styles/login.module.scss';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
 

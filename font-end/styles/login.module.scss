@@ -65,25 +65,32 @@
     border: none;
 }
 .input0 {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC);
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: 16px 18px;
-    background-position: 98% 50%;
-    cursor: auto;
-    color: #333333;
-    line-height: 1.2;
     font-size: 18px;
-    display: block;
-    width: 100%;
+	border-radius: 20px;
+	width: 100%;
     height: 40px;
-    padding: 0 20px;
-    border-radius: 20px;
-    border: 1px solid #e2e2e2;
+	text-align: center;
+	
+    border: 1px solid #e2e2e2 !important;
+}
+.input_password {
+	border-radius: 20px;
+	height: 40px;
+	font-size: 18px;
+	input {
+		text-align: center;
+		
+		font-size: 18px;
+		
+		width: 100%;
+		height: 100%;
+		
+		border: 1px solid #e2e2e2;
+	}
 }
 .wrap_input > input:focus {
     border-radius: 20px;
-    border: 1px solid #fc00ff;
+    /*border: 1px solid #fc00ff;*/
     height: 40px;
     transition: border 1s ease;
 }
@@ -102,6 +109,10 @@
     border-radius: 20px;
     color: white;
     cursor: pointer;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .title_singup {
     width: 100%;

@@ -21,7 +21,7 @@ const checkPhoneRegister = require('../middleware/checkPhoneRegister.middleware'
 const checkAccount = require('../middleware/checkAccount.middleware');
 
 authorRoutes.route('/api/login').post(checkAccount, checkLogin, login);
-authorRoutes.route('/api/register').post(checkAccount, checkEmailRegister, checkPhoneRegister, createUser);
+authorRoutes.route('/api/register').post(checkEmailRegister, checkPhoneRegister, createUser, checkAccount, checkLogin, login);
 authorRoutes.route('/api/refresh-token').post(refreshToken);
 
 module.exports = authorRoutes;

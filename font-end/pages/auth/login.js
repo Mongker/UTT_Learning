@@ -8,10 +8,16 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-import style from 'styles/login.module.css';
+import style from 'styles/login.module.scss';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
+import withFirebaseAuth from 'react-with-firebase-auth';
+import * as firebase from 'firebase/app';
+require('firebase/auth');
+// styles
+import styled from 'styled-components';
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Component
 import MetaView from '../../components/MetaView';
@@ -19,8 +25,17 @@ import MetaView from '../../components/MetaView';
 // hooks
 import useDispatchUtil from 'hooks/useDispatchUtil';
 import CONFIG_TYPE_ACTION from '../../config/configTypeAction';
+import validateEmail from '../../util/function/validateEmail';
+import InputValidation from '../../designUI/InputFolder/InputValidation';
+import firebaseConfig from '../../config/firebaseConfig';
 
-function Login() {
+// const style
+const InputValidationCustom = styled(InputValidation)`
+    border-radius: 20px;
+    font-size: 18px;
+`;
+
+function Login({ signInWithGoogle, user }) {
     // state
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -30,6 +45,11 @@ function Login() {
 
     const router = useRouter();
 
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('meId') && localStorage.getItem('accessToken')) {
+        router.push('/');
+        return null;
+    }
+
     // handle func
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -38,23 +58,52 @@ function Login() {
         setPassword(e.target.value);
     };
 
-    const funcSuccess = () => {
-        console.log('router', router); // MongLV log fix bug
+    function funcSuccess() {
+        message.warn('Đăng nhập thành công');
         router.push('/');
-    };
-    const handleSave = () => {
-        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: 'admin@utt.com', password: '123456' }, funcSuccess);
-        // if (email.length > 0 && password.length > 0) {
-        // Code ở đây
-        // } else message.warn('Không được bỏ trống thông tin');
-    };
-    const handleSingUp = (e) => {
+    }
+    function handleSingUp(e) {
         e.preventDefault();
-        router.push('/singup');
-    };
-    // React.useEffect(() => {
-    //     user && router.push('/');
-    // }, [user]);
+        router.push('/auth/sigup');
+    }
+    function funcError() {
+        message.warn('Tài khoản hoặc mật khẩu không chính xác');
+    }
+    function handleSave() {
+        if (email.length > 0 && password.length > 0) {
+            dispatchUtil(
+                CONFIG_TYPE_ACTION.SAGA.USER.LOGIN,
+                { email: email, password: password },
+                funcSuccess,
+                funcError,
+            );
+        } else {
+            message.warn('Bắt buộc phải nhập thông tin để đang nhập');
+        }
+    }
+
+    function handleValidateEmail() {
+        if (email.length === 0) return false;
+        return validateEmail(email);
+    }
+    function handleValidatePass(password) {
+        if (password.length === 0) return false;
+        else if (password.length < 6) return false;
+        return true;
+    }
+
+    React.useEffect(() => {
+        const mong = {
+            displayName: 'Mong Lê Văn',
+            email: 'monglv.bkav@gmail.com',
+            phoneNumber: null,
+            photoURL: 'https://lh3.googleusercontent.com/a-/AOh14Gj66HK4R1Ten1sB2xkBAHRVJUvJXhKKW7ZHyjI=s96-c',
+            providerId: 'google.com',
+            uid: '109936776856068640422',
+        };
+        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: email, password: password }, funcSuccess, funcError);
+    }, [user]);
+
     return (
         <React.Fragment>
             <MetaView title={'Login - Unica'} />
@@ -69,22 +118,39 @@ function Login() {
                                 <h3>ĐĂNG NHẬP</h3>
                             </div>
                             <div className={style.wrap_input}>
-                                <input
+                                <InputValidationCustom
                                     onChange={handleChangeEmail}
-                                    placeholder={'Email tài khoản'}
+                                    visible={!handleValidateEmail(email)}
+                                    value={email}
                                     className={style.input0}
+                                    title={
+                                        email.length > 0
+                                            ? 'Đây phải là một email hoặc số điện thoại'
+                                            : 'Trường này không được để trống'
+                                    }
+                                    placeholder={'Email hoặc số điện thoại'}
                                 />
                             </div>
                             <div className={style.wrap_input}>
-                                <input
-                                    type={'password'}
+                                <InputValidationCustom
                                     onChange={handleChangePassword}
+                                    visible={!handleValidatePass(password)}
+                                    value={password}
+                                    className={style.input_password}
+                                    title={
+                                        password.length === 0
+                                            ? 'Mật khẩu không được để trống'
+                                            : password.length <= 6 && 'Mật khẩu không đủ 6 ký tự'
+                                    }
                                     placeholder={'Mật khẩu'}
-                                    className={style.input0}
+                                    type={'password'}
                                 />
                             </div>
-                            <div className={style.title_login} onClick={handleSave}>
+                            <div role={'presentation'} className={style.title_login} onClick={handleSave}>
                                 Đăng nhập
+                            </div>
+                            <div role={'presentation'} className={style.title_login} onClick={signInWithGoogle}>
+                                Đăng nhập Với Google
                             </div>
                             <div
                                 style={{
@@ -104,5 +170,9 @@ function Login() {
         </React.Fragment>
     );
 }
+let firebaseAppAuth = firebaseApp.auth();
+let providers = {
+    googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
 
-export default Login;
+export default withFirebaseAuth({ providers, firebaseAppAuth })(Login);

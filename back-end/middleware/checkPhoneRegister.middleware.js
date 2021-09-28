@@ -21,9 +21,8 @@ const checkPhoneRegister = async (req, res, next) => {
     await UserModel.checkPhone(req.con, req.body, (err, rows) => {
         if (err) return res.json({ message: err });
         if (rows.length > 0) {
-            return res.json({ message: 403 });
+            return res.json({ message: 402 });
         } else {
-            console.log('rows 2', rows); // MongLV log fix bug
             next();
         }
     });

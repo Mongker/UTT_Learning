@@ -9,7 +9,7 @@
 const md5 = require('md5');
 const UserModel = require('../../model/user.model');
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
     try {
         const { password, phone = '', email = '' } = req.body;
         // phone, email
@@ -18,12 +18,16 @@ const createUser = async (req, res) => {
             email: email,
             password: md5(password),
         };
-
-        UserModel.create(req.con, data, function (err) {
-            if (err) return res.status(404).json({ message: err });
-            return res.status(200).json({ message: 200 });
-        });
-    } catch (e) {
+		delete req.body.email;
+		delete req.body.phone;
+		req.body.account = phone || email;
+		if(email && phone) {
+			UserModel.create(req.con, data, function (err) {
+				if (err) return res.status(404).json({ message: err });
+				next();
+			});
+		} else return res.status(200).json({ message: 404 });
+	} catch (e) {
         console.log('e', e);
     }
 };

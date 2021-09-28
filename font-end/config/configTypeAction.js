@@ -14,7 +14,7 @@ const CONFIG_TYPE_ACTION = {
     SAGA: {
         USER: {
             LOGIN: 'LOGIN',
-            SIG_UP: 'sigup',
+            SIG_UP: 'SIG_UP',
         },
     },
 };

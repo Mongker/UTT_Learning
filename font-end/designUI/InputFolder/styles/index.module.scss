@@ -1,0 +1,7 @@
+.customTooltip {
+	:global {
+		.ant-tooltip-inner, .ant-tooltip-arrow::before, .ant-tooltip-arrow-content {
+			background-color: #fa3e3e;
+		}
+	}
+}

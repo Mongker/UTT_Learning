@@ -1,5 +1,5 @@
 import { wrapper } from 'redux/store';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // import * as gtag from '../lib/gtag';
 // import '../styles/antd-custom.less';
 import '../styles/index.css';

@@ -33,8 +33,10 @@ function* workerResponse(response, _function) {
         }
         yield accessToken && refreshToken && fork(workerCacheAuth, meId, accessToken, refreshToken);
         yield _function.funcSuccess();
-    }
-    yield _function.funcError();
+    } else {
+		yield _function.funcError();
+	}
+    
 }
 
 /**

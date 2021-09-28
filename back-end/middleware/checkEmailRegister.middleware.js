@@ -19,10 +19,8 @@ const UserModel = require('../model/user.model');
 const checkEmail = async (req, res, next) => {
     await UserModel.checkEmail(req.con, req.body, (err, rows) => {
         if (err) return res.json({ message: err });
-
-        if (rows.length > 1) return res.json({ message: 403 });
+        if (rows.length > 1) return res.json({ message: 402 });
         else {
-            console.log('rows 1', rows); // MongLV log fix bug
             next();
         }
     });
