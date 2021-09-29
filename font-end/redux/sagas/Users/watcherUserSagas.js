@@ -14,8 +14,15 @@ import workerUserSagas from 'redux/sagas/Users/workerUserSagas';
 function* watcherLogin() {
     while (true) {
         const dataTake = yield take(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN);
-        const { email, password } = dataTake.payload;
-        yield fork(workerUserSagas.workerLogin, email, password, dataTake._function);
+        const { email, password, providerId } = dataTake.payload;
+        switch (providerId) {
+            case 'google.com':
+                yield fork(workerUserSagas.workerLoginGoogle, dataTake.payload, dataTake._function);
+                break;
+            default:
+                yield email && password && fork(workerUserSagas.workerLogin, email, password, dataTake._function);
+                break;
+        }
     }
 }
 

@@ -11,13 +11,15 @@ import React from 'react';
 import style from 'styles/login.module.scss';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
-import withFirebaseAuth from 'react-with-firebase-auth';
-import * as firebase from 'firebase/app';
-require('firebase/auth');
+// import withFirebaseAuth from 'react-with-firebase-auth';
+// import * as firebase from 'firebase/app';
+// require('firebase/auth');
+// import firebaseConfig from '../../config/firebaseConfig';
+
 // styles
 import styled from 'styled-components';
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Component
 import MetaView from '../../components/MetaView';
@@ -27,7 +29,6 @@ import useDispatchUtil from 'hooks/useDispatchUtil';
 import CONFIG_TYPE_ACTION from '../../config/configTypeAction';
 import validateEmail from '../../util/function/validateEmail';
 import InputValidation from '../../designUI/InputFolder/InputValidation';
-import firebaseConfig from '../../config/firebaseConfig';
 
 // const style
 const InputValidationCustom = styled(InputValidation)`
@@ -44,6 +45,7 @@ function Login({ signInWithGoogle, user }) {
     const dispatchUtil = useDispatchUtil();
 
     const router = useRouter();
+    // typeof window !== 'undefined' && (window.signOut = signOut);
 
     if (typeof localStorage !== 'undefined' && localStorage.getItem('meId') && localStorage.getItem('accessToken')) {
         router.push('/');
@@ -93,15 +95,18 @@ function Login({ signInWithGoogle, user }) {
     }
 
     React.useEffect(() => {
-        const mong = {
-            displayName: 'Mong Lê Văn',
-            email: 'monglv.bkav@gmail.com',
-            phoneNumber: null,
-            photoURL: 'https://lh3.googleusercontent.com/a-/AOh14Gj66HK4R1Ten1sB2xkBAHRVJUvJXhKKW7ZHyjI=s96-c',
-            providerId: 'google.com',
-            uid: '109936776856068640422',
-        };
-        dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, { email: email, password: password }, funcSuccess, funcError);
+        // const mong = {
+        // 	displayName: 'Mong Lê Văn',
+        // 	email: 'monglv.bkav@gmail.com',
+        // 	phoneNumber: null,
+        // 	photoURL: 'https://lh3.googleusercontent.com/a-/AOh14Gj66HK4R1Ten1sB2xkBAHRVJUvJXhKKW7ZHyjI=s96-c',
+        // 	providerId: 'google.com',
+        // 	uid: '109936776856068640422',
+        // };
+        if (user && user.providerData && user.providerData[0]) {
+            const dataUserGoogle = user && user.providerData && user.providerData[0] && user.providerData[0];
+            dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, dataUserGoogle, funcSuccess, funcError);
+        }
     }, [user]);
 
     return (
@@ -170,9 +175,10 @@ function Login({ signInWithGoogle, user }) {
         </React.Fragment>
     );
 }
-let firebaseAppAuth = firebaseApp.auth();
-let providers = {
-    googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
+// let firebaseAppAuth = firebaseApp.auth();
+// let providers = {
+//     googleProvider: new firebase.auth.GoogleAuthProvider(),
+// };
 
-export default withFirebaseAuth({ providers, firebaseAppAuth })(Login);
+// export default withFirebaseAuth({ providers, firebaseAppAuth })(Login);
+export default Login;

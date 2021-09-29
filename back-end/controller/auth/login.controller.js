@@ -31,6 +31,8 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
  */
 const login = async (req, res) => {
     try {
+        console.log('101112', 101112); // MongLV log fix bug
+
         delete req.user.password;
 
         let userData = { ...req.user };

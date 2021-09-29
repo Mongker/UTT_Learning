@@ -9,25 +9,55 @@
 const md5 = require('md5');
 const UserModel = require('../../model/user.model');
 
+const generateUUID = () => {
+    let d = new Date().getTime();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    });
+};
+
 const createUser = async (req, res, next) => {
     try {
-        const { password, phone = '', email = '' } = req.body;
+        const {
+            password,
+            phone = '',
+            email = '',
+            uid = '',
+            displayName,
+            name = '',
+            photoURL,
+            avatar = '',
+            phoneNumber,
+        } = req.body;
         // phone, email
+        const _password = uid.length > 0 ? md5('123456') : md5(password);
         const data = {
-            phone: phone,
+            phone: phoneNumber || phone,
             email: email,
-            password: md5(password),
+            password: _password,
+            name: displayName || name,
+            avatar: photoURL || avatar,
+            uid: uid,
+            type: uid ? 'google' : 'system',
+            timestamp: new Date().getTime().toString(),
         };
-		delete req.body.email;
-		delete req.body.phone;
-		req.body.account = phone || email;
-		if(email && phone) {
-			UserModel.create(req.con, data, function (err) {
-				if (err) return res.status(404).json({ message: err });
-				next();
-			});
-		} else return res.status(200).json({ message: 404 });
-	} catch (e) {
+        req.body.account = phone || email;
+        console.log('456', 456); // MongLV log fix bug
+        console.log('req.statusCode', req.statusCode); // MongLV log fix bug
+
+        if ((email && phone) || req.statusCode === 204) {
+            console.log('case1'); // MongLV log fix bug
+            UserModel.create(req.con, data, function (err) {
+                if (err) return res.status(404).json({ message: err });
+                next();
+            });
+        } else if (req.statusCode === 402) {
+            console.log('case2'); // MongLV log fix bug
+            next();
+        } else return res.status(200).json({ message: req.statusCode });
+    } catch (e) {
         console.log('e', e);
     }
 };

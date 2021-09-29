@@ -9,8 +9,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
-
+import { connect } from 'react-redux';
 // Component
 import MetaView from '../components/MetaView';
 
@@ -30,7 +31,7 @@ function Index(props) {
             {/*<HeaderController />*/}
             {/*<ContentController />*/}
             {/*<Footer />*/}
-            1111
+            <Link href={'/admin'}>Admin</Link>
         </React.Fragment>
     );
 }
@@ -51,4 +52,5 @@ Index.defaultProps = {
         url: 'https://unica.vercel.app/',
     },
 };
+
 export default Index;

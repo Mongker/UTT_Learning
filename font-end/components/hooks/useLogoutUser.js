@@ -20,7 +20,6 @@ function UseLogoutUser() {
     const { setUser } = React.useContext(ContextApp);
     const handleClear = () => {
         router.push('/login');
-        setUser(null);
         localStorage.clear();
     };
 

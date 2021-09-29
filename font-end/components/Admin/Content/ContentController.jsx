@@ -23,7 +23,7 @@ function ContentController({ activeMenu, refModalProduct }) {
     let Component;
     switch (activeMenu) {
         case TYPE_MENU.CATEGORY:
-            Component = <CategoryView refModalProduct={refModalProduct} />;
+            Component = <CategoryView />;
             break;
         // case TYPE_MENU.USER:
         //     Component = <ManagementUserView />;

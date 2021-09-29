@@ -8,10 +8,11 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import styled from 'styled-components';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown, Menu, Input } from 'antd';
+import { Avatar, Dropdown, Menu, Input, Row, Col, Tooltip } from 'antd';
 
 // Util
 import { TYPE_MENU } from 'util/TypeMenu';
@@ -19,20 +20,36 @@ import ContextApp from 'util/context/ContextApp';
 
 // styles
 import styles from './styles/index.module.scss';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 // hooks
-import UseLogoutUser from '../../hooks/useLogoutUser';
+// import UseLogoutUser from '../../hooks/useLogoutUser';
 
 const { Search } = Input;
+const ColUI = styled(Col)`
+    height: 65px;
+`;
+HeaderView.propTypes = {
+    activeMenu: PropTypes.string.isRequired,
+    signOut: PropTypes.func,
+};
 
-function HeaderView({ activeMenu }) {
-    const { user, setTextSearch } = React.useContext(ContextApp);
-    const handleLogOut = UseLogoutUser();
+HeaderView.defaultProps = {
+    signOut: () => null,
+};
+
+function HeaderView({ activeMenu, signOut }) {
+    const { setTextSearch } = React.useContext(ContextApp);
+    // hooks
+    const router = useRouter();
+    const use = useSelector((state) => state.User);
+    console.log('use', use); // MongLV log fix bug
 
     // const
-    const name = user && user.name ? user.name : 'Chưa đặt tên';
-    const email = user && user.email ? user.email : '****@gmail.com';
-    const role = user && user.role ? user.role : 'Người dùng';
+    const name = 'Chưa đặt tên';
+    const email = '****@gmail.com';
+    const role = 'Người dùng';
     // const name = user && user.name ? user.name : 'Ẩn danh';
     // logic
     let text;
@@ -56,49 +73,45 @@ function HeaderView({ activeMenu }) {
 
     // handle func
     const handleClick = (event) => {
-        event.key === 'LOGOUT' && handleLogOut();
+        // event.key === 'LOGOUT';
     };
-
     const onSearch = (value) => {
-        console.log(value);
         setTextSearch(value);
     };
+    function onLogin() {
+        signOut();
+        localStorage.clear();
+        router.push('/');
+    }
 
     // JSX
-    const menu = (
-        <Menu className={styles.menu} onClick={handleClick}>
-            {/*<Menu.Item key='0'>1st menu item</Menu.Item>*/}
-            {/*<Menu.Item key='1'>2nd menu item</Menu.Item>*/}
-            <Menu.Item key='LOGOUT' icon={<LogoutOutlined />}>
-                Đăng xuất
-            </Menu.Item>
-        </Menu>
-    );
     return (
         <React.Fragment>
-            <div className={styles.search}>
-                <Search placeholder={'Tìm kiếm nhanh'} onSearch={onSearch} enterButton />
-            </div>
-            <div className={styles.controller}>
-                <div className={styles.title}>{text}</div>
-                <div style={{ width: '70%' }} />
-                <Dropdown overlay={menu} overlayClassName={styles.dropdown}>
-                    <div className={'flex_row'}>
-                        <div className={classNames(styles.item)}>
+            <Row align='middle' className={styles.controller}>
+                <ColUI flex={2}>
+                    <Search placeholder={'Tìm kiếm nhanh'} className={styles.search} onSearch={onSearch} enterButton />
+                </ColUI>
+                <ColUI flex={6}>
+                    <p className={styles.title}>{text}</p>
+                </ColUI>
+                <ColUI flex={1}>
+                    <Row align='middle'>
+                        <ColUI className={classNames(styles.item)}>
                             <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} src={''} />
-                        </div>
-                        <div className={classNames(styles.item, styles.name)}>
+                        </ColUI>
+                        <ColUI className={classNames(styles.item, styles.name)}>
                             {name} ({email} - {role})
-                        </div>
-                    </div>
-                </Dropdown>
-            </div>
+                        </ColUI>
+                    </Row>
+                </ColUI>
+                <ColUI flex={0.4}>
+                    <Tooltip placement='bottom' title={'Đăng xuất'}>
+                        <LogoutOutlined style={{ fontSize: '24px' }} onClick={onLogin} />
+                    </Tooltip>
+                </ColUI>
+            </Row>
         </React.Fragment>
     );
 }
-
-HeaderView.propTypes = {};
-
-HeaderView.defaultProps = {};
 
 export default HeaderView;

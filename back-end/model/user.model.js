@@ -23,9 +23,12 @@ module.exports = {
     checkPhone: (con, data, callback) => {
         con.query(`SELECT * FROM user WHERE phone = '${data.phone}'`, callback);
     },
+    checkUidGoogle: (con, data, callback) => {
+        con.query(`SELECT * FROM user WHERE uid_google = '${data.uid}'`, callback);
+    },
 
     create: (con, data, callback) => {
-        const query = `INSERT INTO user SET name = '', 
+        const query = `INSERT INTO user SET name = '${data.name}', 
                 phone = '${data.phone}', 
                 email = '${data.email}', 
                 password = '${data.password}', 
@@ -35,8 +38,13 @@ module.exports = {
                 coin = '0',
                 status_user = '1',
                 position='Người dùng',
-                list_product_open = '[]'
+                list_product_open = '[]',
+                type= '${data.type}',
+                uid_google= '${data.uid.toString()}',
+                avatar= '${data.avatar.toString()}',
+                timestamp_create= '${data.timestamp}'
                 `;
+        console.log('query', query); // MongLV log fix bug
         con.query(query, callback);
     },
     update: (con, id, querySQL, callback) => {

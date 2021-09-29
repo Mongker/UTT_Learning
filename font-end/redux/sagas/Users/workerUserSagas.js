@@ -19,7 +19,12 @@ function* workerLogin(email, password, _function) {
         yield fork(workerBaseSagas.workerResponse, response, _function);
     }
 }
+function* workerLoginGoogle(payload, _function) {
+    const response = yield baseAPI.add(CONFIG_TYPE_API.LOGIN_GOOGLE, payload);
+    yield fork(workerBaseSagas.workerResponse, response, _function);
+}
 const workerUserSagas = {
-    workerLogin: workerLogin,
+    workerLogin,
+    workerLoginGoogle,
 };
 export default workerUserSagas;

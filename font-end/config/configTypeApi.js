@@ -16,6 +16,7 @@ const CONFIG_TYPE_API = {
     TRANSACTION: '/transaction',
     OPEN: '/open',
     LOGIN: '/login',
+    LOGIN_GOOGLE: '/login_google',
     SIG_UP: '/register',
 };
 export default CONFIG_TYPE_API;

@@ -9,6 +9,17 @@ import '../styles/content.css';
 import '../styles/reset.css';
 import 'video-react/dist/video-react.css';
 
+import withFirebaseAuth from 'react-with-firebase-auth';
+import * as firebase from 'firebase/app';
+require('firebase/auth');
+import firebaseConfig from '../config/firebaseConfig';
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // if already initialized, use that one
+}
+
 // context
 import ContextApp from 'util/context/ContextApp';
 export function reportWebVitals(metric) {
@@ -23,12 +34,16 @@ function App({ Component, pageProps }) {
 
     // store context
     const valueContextApp = React.useMemo(() => ({}), []);
-
+    const WrappedComponentProps = withFirebaseAuth({ providers, firebaseAppAuth })(Component);
     return getLayout(
         <ContextApp.Provider value={valueContextApp}>
-            <Component {...pageProps} />
+            <WrappedComponentProps {...pageProps} />
         </ContextApp.Provider>,
     );
 }
+let firebaseAppAuth = firebase.auth();
+let providers = {
+    googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
 
 export default wrapper.withRedux(App);

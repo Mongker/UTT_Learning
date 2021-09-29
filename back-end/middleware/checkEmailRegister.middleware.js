@@ -21,6 +21,7 @@ const checkEmail = async (req, res, next) => {
         if (err) return res.json({ message: err });
         if (rows.length > 1) return res.json({ message: 402 });
         else {
+            req.statusCode = 204;
             next();
         }
     });

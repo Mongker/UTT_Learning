@@ -23,6 +23,7 @@ const checkPhoneRegister = async (req, res, next) => {
         if (rows.length > 0) {
             return res.json({ message: 402 });
         } else {
+            req.statusCode = 204;
             next();
         }
     });

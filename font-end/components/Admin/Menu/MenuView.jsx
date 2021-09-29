@@ -18,8 +18,7 @@ import useUserBase from '../../hooks/LogicData/useUserBase';
 // const
 function MenuView(props) {
     const { TYPE_MENU, setActiveMenu, activeMenu } = props;
-    const { myUser } = useUserBase();
-    const role = myUser && myUser.role;
+    const role = 'admin';
 
     function handleClick(event) {
         setActiveMenu(event.key);
