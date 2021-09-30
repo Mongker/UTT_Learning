@@ -9,19 +9,19 @@
 
 module.exports = {
     create: function (con, data, callback) {
-        con.query(
-            `INSERT INTO category SET rootId = '${data.rootId}',
+        const query = `INSERT INTO category SET rootId = '${data.rootId || 0}',
                 icon = '${data.icon}',
                 status = '${data.status}',
                 name = '${data.name}', 
                 description = '${data.description}', 
-                sort_order = '${data.sort_order}'
-                `,
-            callback,
-        );
+                sort_order = '${data.sort_order}',
+                timestamp_create= '${data.timestamp_create}'
+                `;
+        con.query(query, callback);
     },
     update: function (con, data, callback) {
-        con.query(`UPDATE category SET rootId = '${data.rootId}', icon = '${data.icon}', status = '${data.status}', name = '${data.name}', description = '${data.description}', sort_order = '${data.sort_order}' WHERE id = '${data.id}'`, callback);
+        const query = `UPDATE category SET rootId = '${data.rootId}', icon = '${data.icon}', status = '${data.status}', name = '${data.name}', description = '${data.description}', sort_order = '${data.sort_order}' WHERE id = '${data.id}'`;
+        con.query(query, callback);
     },
     getList: function (con, callback) {
         con.query('SELECT * FROM category', callback);

@@ -11,19 +11,18 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Layout, notification, Spin } from 'antd';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 // component
 import MetaView from '../components/MetaView';
 
 // util
 import { TYPE_MENU } from 'util/TypeMenu';
-import { url_base_img } from '../util/TypeUI';
-import { getList } from 'redux/actions/userAction';
-import { useDispatch } from 'react-redux';
 // import ModalProductView from '../components/Admin/Product/Modal/ModalProductView';
 
 // style
 import styles from '../components/Admin/styles/index.module.scss';
+import PropTypes from 'prop-types';
+import { Map } from 'immutable';
 
 // const
 const { Header, Content, Sider } = Layout;
@@ -32,15 +31,28 @@ const { Header, Content, Sider } = Layout;
 const ContentView = dynamic(import('../components/Admin/Content/ContentView'), { ssr: false });
 const HeaderView = dynamic(import('../components/Admin/Header/HeaderView'), { ssr: false });
 const MenuView = dynamic(import('../components/Admin/Menu/MenuView'), { ssr: false });
-const ImageUI = dynamic(import('designUI/ImageUI'));
+// const ImageUI = dynamic(import('designUI/ImageUI'));
 
 notification.config({
     duration: 2,
 });
 
+Admin.propTypes = {
+    signOut: PropTypes.func,
+};
+
+Admin.defaultProps = {
+    signOut: () => null,
+};
+
 function Admin({ signOut }) {
     // context
     const router = useRouter();
+
+    // redux
+    const meId = useSelector((state) => state.HasUser.getIn(['root', 'meId']));
+    const meData = useSelector((state) => state.User.get(meId) || Map());
+    const roleMe = meData.get('role');
 
     // state
     const [isLoading, setIsLoading] = React.useState(true);
@@ -65,6 +77,17 @@ function Admin({ signOut }) {
         return () => clearTimeout(handleLoading);
     }, []);
 
+    // TODO by MongLV: chan khi chua dang nhap
+    if (
+        (typeof localStorage !== 'undefined' &&
+            !localStorage.getItem('meId') &&
+            !localStorage.getItem('accessToken')) ||
+        roleMe === 'user'
+    ) {
+        router.replace('/');
+        return null;
+    }
+
     // JSX
     const ComponentContent = (
         <Layout style={{ minHeight: '100vh' }}>
@@ -81,7 +104,9 @@ function Admin({ signOut }) {
                 <Header className='site-layout-background-header' style={{ padding: 0 }}>
                     <HeaderView activeMenu={activeMenu} signOut={signOut} />
                 </Header>
-                <Content style={{ margin: '0 10px' }}>{/*<ContentView activeMenu={activeMenu} />*/}</Content>
+                <Content style={{ margin: '0 10px' }}>
+                    <ContentView activeMenu={activeMenu} />
+                </Content>
             </Layout>
         </Layout>
     );
@@ -98,4 +123,4 @@ function Admin({ signOut }) {
     );
 }
 
-export default connect((state) => state)(React.memo(Admin));
+export default React.memo(Admin);

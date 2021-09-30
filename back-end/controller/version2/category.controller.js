@@ -16,9 +16,13 @@ const GET_LIST = async (req, res) => {
             const items = convertArrayToItems(arrayItem);
             return res.status(200).json({
                 message: 200,
-                category: {
-                    itemIds: Object.keys(items),
-                    items,
+                data: {
+                    HasCategory: {
+                        root: {
+                            itemIds: Object.keys(items),
+                        },
+                    },
+                    Category: items,
                 },
             });
         });
@@ -26,5 +30,52 @@ const GET_LIST = async (req, res) => {
         console.log('e', e);
     }
 };
+const CREATE = async (req, res) => {
+    // Lấy ra phần tử vừa được tạo
+    if (req.category && req.break) {
+        try {
+            const id = req.category[0] && req.category[0].id;
+            return res.status(200).json({
+                message: 200,
+                data: {
+                    HasCategory: {
+                        root: {
+                            itemIds: [`${id}`],
+                        },
+                    },
+                    Category: {
+                        [id]: { ...req.category[0], id: `${id}` },
+                    },
+                },
+            });
+        } catch (e) {
+            console.log('e', e);
+        }
+    } else {
+        return res.status(200).json({ message: req.statusCode });
+    }
+};
 
-module.exports = { GET_LIST };
+const UPDATE = async (req, res) => {
+    if (req.break) {
+        return res.status(200).json({ message: 200 });
+    } else {
+        return res.status(200).json({ message: 404 });
+    }
+};
+const DELETE = async (req, res) => {
+    if (req.dataJwtDecoded.role === 'admin') {
+        await CategoryModel.delete(req.con, req.params.id, function (err, row) {
+            if (err) return res.status(404).json({ message: err });
+            return res.status(200).json({ message: 200 });
+        });
+    } else {
+        return res.status(200).json({ message: 404 });
+    }
+};
+module.exports = {
+    GET_LIST,
+    CREATE,
+    UPDATE,
+    DELETE,
+};

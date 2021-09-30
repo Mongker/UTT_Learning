@@ -10,8 +10,10 @@
 import { all } from 'redux-saga/effects';
 // watch saga
 import Users from 'redux/sagas/Users';
+import Base from 'redux/sagas/Base';
+import Category from 'redux/sagas/Category';
 
 // saga
 export default function* index() {
-    yield all([Users()]);
+    yield all([Users(), Base(), Category()]);
 }

@@ -8,6 +8,8 @@
  */
 import hasUserReducer from 'redux/reducers/Users/hasUserReducer';
 import userReducer from 'redux/reducers/Users/userReducer';
+import categoryReducer from 'redux/reducers/Category/categoryReducer';
+import hasCategoryReducer from 'redux/reducers/Category/hasCategoryReducer';
 
-const LIST_STORE = [hasUserReducer, userReducer];
+const LIST_STORE = [hasUserReducer, userReducer, categoryReducer, hasCategoryReducer];
 export default LIST_STORE;

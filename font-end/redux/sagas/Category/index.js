@@ -7,10 +7,15 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 import { all } from 'redux-saga/effects';
-import watcherUserSagas from 'redux/sagas/Users/watcherUserSagas';
+
 // watch saga
+import watcherCategorySagas from 'redux/sagas/Category/watcherCategorySagas';
 
 // saga
-export default function* Users() {
-    yield all([watcherUserSagas.watcherLogin(), watcherUserSagas.watcherCheckPoint()]);
+export default function* Category() {
+    yield all([
+        watcherCategorySagas.watcherGetList(),
+        watcherCategorySagas.watcherDelete(),
+        watcherCategorySagas.watcherAdd(),
+    ]);
 }

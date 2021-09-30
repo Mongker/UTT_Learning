@@ -20,6 +20,8 @@ const checkEmailRegister = require('../middleware/checkEmailRegister.middleware'
 const checkPhoneRegister = require('../middleware/checkPhoneRegister.middleware');
 const checkAccount = require('../middleware/checkAccount.middleware');
 const checkLoginTypeGoogle = require('../middleware/checkLoginTypeGoogle.middleware');
+const isAuth = require('../middleware/isAuth.middleware');
+const checkpoint = require('../controller/auth/checkpoin.controller');
 
 authorRoutes.route('/api/login').post(checkAccount, checkLogin, login);
 authorRoutes.route('/api/login_google').post(checkLoginTypeGoogle, createUser, checkLogin, login);
@@ -27,5 +29,6 @@ authorRoutes
     .route('/api/register')
     .post(checkEmailRegister, checkPhoneRegister, createUser, checkAccount, checkLogin, login);
 authorRoutes.route('/api/refresh-token').post(refreshToken);
+authorRoutes.route('/api/check-point').post(isAuth, checkLogin, login);
 
 module.exports = authorRoutes;

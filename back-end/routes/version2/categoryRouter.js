@@ -12,12 +12,16 @@ const CategoryRouter = express.Router();
 
 // middleware
 const isAuth = require('../../middleware/isAuth.middleware');
+const checkName = require('../../middleware/category/checkName.middleware');
+const create = require('../../middleware/category/create.middleware');
+const update = require('../../middleware/category/update.middleware');
 
 // container
-const { GET_LIST } = require('../../controller/version2/category.controller');
+const { GET_LIST, CREATE, UPDATE, DELETE } = require('../../controller/version2/category.controller');
 
 const path = '/api/category-v2';
-// CategoryRouter.use(isAuth);
-CategoryRouter.route(path).get(GET_LIST);
+
+CategoryRouter.route(path).get(GET_LIST).post(isAuth, checkName, create, checkName, CREATE).put(isAuth, update, UPDATE);
+CategoryRouter.route(`${path}/:id`).delete(isAuth, DELETE);
 
 module.exports = CategoryRouter;

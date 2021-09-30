@@ -22,15 +22,44 @@ if (!firebase.apps.length) {
 
 // context
 import ContextApp from 'util/context/ContextApp';
+
+// hooks
+import useDispatchUtil from '../hooks/useDispatchUtil';
+import CONFIG_TYPE_ACTION from '../config/configTypeAction';
 export function reportWebVitals(metric) {
     if (metric.label === 'custom') {
         console.log('metric:', metric); // TODO by MongLV: log ra xem hiệu năng của website
     }
 }
 
-function App({ Component, pageProps }) {
+let render;
+function App(props) {
+    const { Component, pageProps } = props;
     // Sử dụng bố cục được xác định ở cấp trang, nếu có (https://nextjs.org/docs/basic-features/layouts)
     const getLayout = Component.getLayout || ((page) => page);
+
+    const dispatch = useDispatchUtil();
+    const pathname = props.router.pathname;
+
+    React.useEffect(() => {
+        if (!render) {
+            dispatch(CONFIG_TYPE_ACTION.SAGA.USER.CHECK_POINT);
+            render = render + 1;
+        }
+    }, []);
+
+    React.useEffect(() => {
+        switch (pathname) {
+            case '/admin':
+                dispatch(CONFIG_TYPE_ACTION.SAGA.CATEGORY.GET_LIST);
+                break;
+            case '/':
+                dispatch(CONFIG_TYPE_ACTION.SAGA.CATEGORY.GET_LIST);
+                break;
+            default:
+                break;
+        }
+    }, [pathname]);
 
     // store context
     const valueContextApp = React.useMemo(() => ({}), []);

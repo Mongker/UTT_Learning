@@ -31,8 +31,6 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
  */
 const login = async (req, res) => {
     try {
-        console.log('101112', 101112); // MongLV log fix bug
-
         delete req.user.password;
 
         let userData = { ...req.user };
@@ -49,6 +47,13 @@ const login = async (req, res) => {
         tokenList[refreshToken] = { accessToken, refreshToken };
 
         // console.log(`Gửi Token và Refresh Token về cho client...`);
+        let list_product_open = [];
+        try {
+            req.user && req.user.list_product_open && (list_product_open = JSON.parse(req.user.list_product_open));
+        } catch (e) {
+            console.log(e);
+        }
+        const user = { ...req.user, list_product_open };
         return await res.status(200).json({
             message: 200,
             auth: {
@@ -59,12 +64,12 @@ const login = async (req, res) => {
             data: {
                 HasUser: {
                     root: {
-                        itemIds: [req.user.id],
-                        meId: req.user.id,
+                        itemIds: [`${req.user.id}`],
+                        meId: `${req.user.id}`,
                     },
                 },
                 User: {
-                    [req.user.id]: req.user,
+                    [req.user.id]: user,
                 },
             },
         });

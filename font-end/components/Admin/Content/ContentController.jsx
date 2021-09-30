@@ -9,17 +9,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import dynamic from 'next/dynamic';
 
-// component
-import CategoryView from '../Category/CategoryView';
-import ManagementUserView from '../ManagementUser/ManagementUserView';
-import ProductView from '../Product/ProductView';
+// const component
+const CategoryView = dynamic(() => import('../Category/CategoryView'), { ssr: false });
+const ManagementUserView = dynamic(() => import('../ManagementUser/ManagementUserView'), { ssr: false });
+const ProductView = dynamic(() => import('../Product/ProductView'), { ssr: false });
+const TransactionView = dynamic(() => import('../Transaction/TransactionView'), { ssr: false });
 
 // util
 import { TYPE_MENU } from 'util/TypeMenu';
-import TransactionView from '../Transaction/TransactionView';
+import { message } from 'antd';
 
-function ContentController({ activeMenu, refModalProduct }) {
+function ContentController({ activeMenu }) {
     let Component;
     switch (activeMenu) {
         case TYPE_MENU.CATEGORY:

@@ -11,6 +11,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styled from 'styled-components';
+import { Map } from 'immutable';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, Menu, Input, Row, Col, Tooltip } from 'antd';
 
@@ -22,6 +23,7 @@ import ContextApp from 'util/context/ContextApp';
 import styles from './styles/index.module.scss';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import convertUrl from 'util/function/convertUrl';
 
 // hooks
 // import UseLogoutUser from '../../hooks/useLogoutUser';
@@ -43,13 +45,14 @@ function HeaderView({ activeMenu, signOut }) {
     const { setTextSearch } = React.useContext(ContextApp);
     // hooks
     const router = useRouter();
-    const use = useSelector((state) => state.User);
-    console.log('use', use); // MongLV log fix bug
+    const meId = useSelector((state) => state.HasUser.getIn(['root', 'meId']));
+    const meData = useSelector((state) => state.User.get(meId) || Map());
 
     // const
-    const name = 'Chưa đặt tên';
-    const email = '****@gmail.com';
-    const role = 'Người dùng';
+    const name = meData.get('name');
+    const email = meData.get('email');
+    const avatar = meData.get('avatar');
+
     // const name = user && user.name ? user.name : 'Ẩn danh';
     // logic
     let text;
@@ -72,9 +75,6 @@ function HeaderView({ activeMenu, signOut }) {
     }
 
     // handle func
-    const handleClick = (event) => {
-        // event.key === 'LOGOUT';
-    };
     const onSearch = (value) => {
         setTextSearch(value);
     };
@@ -97,10 +97,14 @@ function HeaderView({ activeMenu, signOut }) {
                 <ColUI flex={1}>
                     <Row align='middle'>
                         <ColUI className={classNames(styles.item)}>
-                            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} src={''} />
+                            <Avatar
+                                style={{ backgroundColor: '#87d068' }}
+                                icon={<UserOutlined />}
+                                src={convertUrl(avatar)}
+                            />
                         </ColUI>
                         <ColUI className={classNames(styles.item, styles.name)}>
-                            {name} ({email} - {role})
+                            {name} ({email})
                         </ColUI>
                     </Row>
                 </ColUI>

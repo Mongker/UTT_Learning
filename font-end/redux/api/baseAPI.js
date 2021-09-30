@@ -11,7 +11,7 @@ import axiosClient from './axiosClient';
 import queryString from 'query-string';
 
 const baseAPI = {
-    getAll(url, data) {
+    getAll(url, data = {}) {
         const paramsString = queryString.stringify(data);
         return axiosClient.get(`${url}?${paramsString}`);
     },

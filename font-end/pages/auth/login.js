@@ -48,7 +48,7 @@ function Login({ signInWithGoogle, user }) {
     // typeof window !== 'undefined' && (window.signOut = signOut);
 
     if (typeof localStorage !== 'undefined' && localStorage.getItem('meId') && localStorage.getItem('accessToken')) {
-        router.push('/');
+        router.replace('/');
         return null;
     }
 
@@ -62,7 +62,7 @@ function Login({ signInWithGoogle, user }) {
 
     function funcSuccess() {
         message.warn('Đăng nhập thành công');
-        router.push('/');
+        router.replace('/');
     }
     function handleSingUp(e) {
         e.preventDefault();
@@ -103,6 +103,7 @@ function Login({ signInWithGoogle, user }) {
         // 	providerId: 'google.com',
         // 	uid: '109936776856068640422',
         // };
+        debugger; // Todo by MongLV
         if (user && user.providerData && user.providerData[0]) {
             const dataUserGoogle = user && user.providerData && user.providerData[0] && user.providerData[0];
             dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, dataUserGoogle, funcSuccess, funcError);

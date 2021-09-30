@@ -10,10 +10,10 @@
 import React, { useState } from 'react';
 import { Button, message, Tree } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // action
-import * as categoryAction from 'redux/actions/categoryAction';
+// import * as categoryAction from 'redux/actions/categoryAction';
 
 // component
 import ModalUI from './ModalUI';
@@ -21,26 +21,23 @@ import ModalUI from './ModalUI';
 // styles
 import styles from './styles/index.module.scss';
 import TitleTreeView from './TitleTree/TitleTreeView';
-import { url_base_img } from '../../../util/TypeUI';
 import ProductView from '../Product/ProductView';
-import useCategoryBase from '../../hooks/LogicData/useCategoryBase';
 import ContextApp from '../../../util/context/ContextApp';
+import CONFIG_STORE from '../../../config/configStore';
+import convertUrl from '../../../util/function/convertUrl';
 
-const CategoryView = ({ refModalProduct }) => {
+const CategoryView = (props) => {
     // redux
-    const dispatch = useDispatch();
-    const { category, categoryObj } = useCategoryBase();
     const { keyTreeActive, setKeyTreeActive } = React.useContext(ContextApp);
+    const category = useSelector((status) => status[CONFIG_STORE.Category]);
+    const categoryIds = useSelector((status) => status[CONFIG_STORE.HasCategory].getIn(['root', 'itemIds']));
 
     // state
     const [treeData, setTreeData] = useState([]);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    // ref
-    const refModalAdd = React.useRef(null);
-    const refModalAddProduct = React.useRef(null);
-
-    // const
-    const urlImg = url_base_img;
+    // callback
+    const _setIsModalVisible = React.useCallback((isValue = false) => setIsModalVisible(isValue), [isModalVisible]);
 
     // handle func
     const onSelect = (selectedKeys, info) => {
@@ -49,33 +46,33 @@ const CategoryView = ({ refModalProduct }) => {
 
     const showModalAdd = (item, event) => {
         event.stopPropagation();
-        refModalAdd.current && refModalAdd.current.showModal();
-        refModalAdd.current && refModalAdd.current.setRootId(item.id);
-        // refModalAdd.current && refModalAdd.current.setItemEdit(item);
     };
 
     const showModalEdit = (item, event) => {
         event.stopPropagation();
-        refModalAdd.current && refModalAdd.current.showModal();
-        refModalAdd.current && refModalAdd.current.setItemEdit(item);
-        refModalAdd.current && refModalAdd.current.setItemEdit(item);
     };
 
     const setChildren = (id, key) => {
         const children = [];
         let dem = 0;
-        category.map((itemChildren) => {
-            if (`${itemChildren.rootId}` === `${id}`) {
+        categoryIds.map((_id) => {
+            if (`${category.getIn([_id, 'rootId'])}` === `${id}`) {
                 const _key = `${key}-${dem}`;
-                const img = itemChildren.icon ? `${urlImg}${itemChildren.icon}` : urlImg + 'operation.png';
+                const img = category.getIn([_id, 'icon'])
+                    ? convertUrl(category.getIn([_id, 'icon']))
+                    : 'https://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
                 children.push({
                     title: (
-                        <TitleTreeView item={itemChildren} showModalAdd={showModalAdd} showModalEdit={showModalEdit} />
+                        <TitleTreeView
+                            item={category.get(_id)}
+                            showModalAdd={showModalAdd}
+                            showModalEdit={showModalEdit}
+                        />
                     ),
                     // title: itemChildren.name,
-                    key: itemChildren.id,
+                    key: category.getIn([_id, 'rootId']),
                     icon: <img src={img} alt={'icon'} style={{ width: 20, height: 17, objectFit: 'cover' }} />,
-                    children: setChildren(itemChildren.id, _key.toString()),
+                    children: setChildren(category.getIn([_id, 'id']), _key.toString()),
                 });
                 dem = dem + 1;
             }
@@ -85,14 +82,24 @@ const CategoryView = ({ refModalProduct }) => {
     const updateTreeData = () => {
         let newTreeData = [];
         let dem = 0;
-        category.map((item) => {
-            const img = item.icon ? `${urlImg}${item.icon}` : urlImg + 'operation.png';
-            if (`${item.rootId}` === '1') {
+        categoryIds.map((id) => {
+            const img = category.getIn([id, 'icon'])
+                ? convertUrl(category.getIn([id, 'icon']))
+                : 'https://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
+            if (`${category.getIn([id, 'rootId'])}` === '0') {
+                const children = setChildren(category.getIn([id, 'id']), `${dem}`);
                 newTreeData.push({
-                    title: <TitleTreeView item={item} showModalAdd={showModalAdd} showModalEdit={showModalEdit} />,
-                    key: item.id,
+                    title: (
+                        <TitleTreeView
+                            item={category.get(id)}
+                            showModalAdd={showModalAdd}
+                            showModalEdit={showModalEdit}
+                            isDelete={!children.length > 0}
+                        />
+                    ),
+                    key: category.getIn([id, 'rootId']),
                     icon: <img src={img} alt={'icon'} style={{ width: 20, height: 17, objectFit: 'cover' }} />,
-                    children: setChildren(item.id, `${dem}`),
+                    children: children,
                 });
                 dem = dem + 1;
             }
@@ -100,18 +107,9 @@ const CategoryView = ({ refModalProduct }) => {
         setTreeData(newTreeData);
     };
 
-    // Xử lý vòng đời
-    React.useEffect(() => {
-        dispatch(categoryAction.getList());
-    }, []);
-
     React.useEffect(() => {
         updateTreeData();
-    }, [category]);
-
-    React.useEffect(() => {
-        refModalAddProduct.current = refModalProduct.current;
-    });
+    }, [categoryIds]);
 
     return (
         <React.Fragment>
@@ -120,35 +118,35 @@ const CategoryView = ({ refModalProduct }) => {
                 style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}
             >
                 <div className={styles.btn_add_category}>
-                    <Button type='primary' onClick={() => refModalAdd.current && refModalAdd.current.showModal()}>
+                    <Button type='primary' onClick={() => _setIsModalVisible(true)}>
                         Thêm danh mục
                     </Button>
                 </div>
-                <h2 style={{ fontWeight: 'bold' }}>
-                    Danh sách{' '}
-                    {keyTreeActive && categoryObj[keyTreeActive] && categoryObj[keyTreeActive].name
-                        ? categoryObj[keyTreeActive].name
-                        : 'ALL'}
-                </h2>
-                {keyTreeActive ? (
-                    <div className={styles.btn_add_category}>
-                        <Button
-                            type='primary'
-                            onClick={() => refModalAddProduct.current && refModalAddProduct.current.showDrawer()}
-                        >
-                            Thêm khóa học
-                        </Button>
-                    </div>
-                ) : (
-                    <div />
-                )}
+                {/*<h2 style={{ fontWeight: 'bold' }}>*/}
+                {/*    Danh sách{' '}*/}
+                {/*    {keyTreeActive && categoryObj[keyTreeActive] && categoryObj[keyTreeActive].name*/}
+                {/*        ? categoryObj[keyTreeActive].name*/}
+                {/*        : 'ALL'}*/}
+                {/*</h2>*/}
+                {/*{keyTreeActive ? (*/}
+                {/*    <div className={styles.btn_add_category}>*/}
+                {/*        <Button*/}
+                {/*            type='primary'*/}
+                {/*            onClick={() => refModalAddProduct.current && refModalAddProduct.current.showDrawer()}*/}
+                {/*        >*/}
+                {/*            Thêm khóa học*/}
+                {/*        </Button>*/}
+                {/*    </div>*/}
+                {/*) : (*/}
+                {/*    <div />*/}
+                {/*)}*/}
             </div>
             <div className={'flex_row'}>
-                <ModalUI refFunc={refModalAdd} />
+                <ModalUI isModalVisible={isModalVisible} setIsModalVisible={_setIsModalVisible} />
                 <div className={styles.custom_tree_antd}>
                     <Tree onSelect={onSelect} treeData={treeData} showIcon draggable />
                 </div>
-                <ProductView keyTreeActive={keyTreeActive} refCallback={refModalAddProduct} />
+                {/*<ProductView keyTreeActive={keyTreeActive} />*/}
             </div>
             {/*<ModalProductView refFunc={refModalAddProduct} idCategory={keyTreeActive} />*/}
         </React.Fragment>

@@ -8,7 +8,7 @@
  */
 const CONFIG_TYPE_API = {
     USER: '/user',
-    CATEGORY: '/category',
+    // CATEGORY: '/category',
     PRODUCT: '/product',
     STUDY_PROGRAM: '/studyprogram',
     VIDEO: '/video',
@@ -18,5 +18,8 @@ const CONFIG_TYPE_API = {
     LOGIN: '/login',
     LOGIN_GOOGLE: '/login_google',
     SIG_UP: '/register',
+    RESET_TOKEN: '/refresh-token',
+    CHECK_POINT: '/check-point',
+    CATEGORY: '/category-v2',
 };
 export default CONFIG_TYPE_API;

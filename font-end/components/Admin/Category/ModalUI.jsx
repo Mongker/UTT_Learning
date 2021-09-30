@@ -10,10 +10,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Input, message, Modal } from 'antd';
-import { useDispatch } from 'react-redux';
-
-// action
-import { post, put } from 'redux/actions/categoryAction';
+import PropTypes from 'prop-types';
 
 // component
 import UploadFileView from './UploadFileView';
@@ -21,17 +18,27 @@ import UploadFileView from './UploadFileView';
 // styles
 import styles from './styles/index.module.scss';
 import { url_base_img } from '../../../util/TypeUI';
+import CONFIG_TYPE_ACTION from '../../../config/configTypeAction';
+import useDispatchUtil from '../../../hooks/useDispatchUtil';
 
-function ModalUI(props) {
-    const { refFunc } = props;
-    const dispatch = useDispatch();
+ModalUI.propTypes = {
+    isModalVisible: PropTypes.func,
+    setIsModalVisible: PropTypes.func,
+};
+
+ModalUI.defaultProps = {
+    isModalVisible: false,
+    setIsModalVisible: () => null,
+};
+
+function ModalUI({ isModalVisible, setIsModalVisible }) {
+    const dispatch = useDispatchUtil();
 
     // state
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [itemEdit, setItemEdit] = useState(null);
-    const [rootId, setRootId] = useState('1');
+    const [rootId, setRootId] = useState('0');
 
     // ref
     const refUpdateFile = React.useRef(null);
@@ -50,7 +57,7 @@ function ModalUI(props) {
     const handleResetState = () => {
         setDescription('');
         setName('');
-        setRootId('1');
+        setRootId('0');
         refUpdateFile.current && refUpdateFile.current.setFileList([]);
         refUpdateFile.current && refUpdateFile.current.setLinkFile('');
         itemEdit && setItemEdit(null);
@@ -75,23 +82,16 @@ function ModalUI(props) {
 
     const handleOk = () => {
         data.icon = refUpdateFile.current ? refUpdateFile.current['linkFile'] : `${url_base_img}operation.png`;
-        itemEdit ? dispatch(put({ ...itemEdit, ...data })) : dispatch(post(data));
+        itemEdit
+            ? dispatch(CONFIG_TYPE_ACTION.SAGA.CATEGORY.ADD, { ...itemEdit, ...data }, () =>
+                  message.success('Thêm thành công'),
+              )
+            : dispatch(CONFIG_TYPE_ACTION.SAGA.CATEGORY.ADD, { ...itemEdit, ...data }, () =>
+                  message.success('Thêm thành công'),
+              );
         handleResetState();
         setIsModalVisible(false);
     };
-
-    // Vòng đời
-    React.useEffect(() => {
-        // Gán ref cho phần tử cha sử dụng lại
-        refFunc.current = {
-            showModal,
-            setItemEdit,
-            setRootId,
-        };
-    });
-    React.useEffect(() => {
-        !isModalVisible && (refUpdateFile.current = null);
-    }, [isModalVisible]);
 
     React.useEffect(() => {
         if (itemEdit) {
@@ -152,9 +152,5 @@ function ModalUI(props) {
         </React.Fragment>
     );
 }
-
-ModalUI.propTypes = {};
-
-ModalUI.defaultProps = {};
 
 export default React.memo(ModalUI);

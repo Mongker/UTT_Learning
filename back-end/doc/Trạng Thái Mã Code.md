@@ -6,3 +6,4 @@
 404: Lỗi thực thi
 402: Dữ kiệu đã tồn tại
 500: Lỗi author
+505: Không có quyển

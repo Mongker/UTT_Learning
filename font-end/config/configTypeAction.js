@@ -10,11 +10,22 @@
 const CONFIG_TYPE_ACTION = {
     STORE: {
         MERGE: 'MERGE',
+        CATEGORY: {
+            DELETE: 'DELETE_STORE_CATEGORY',
+            // ADD: 'ADD_CATEGORY',
+        },
     },
     SAGA: {
         USER: {
             LOGIN: 'LOGIN',
             SIG_UP: 'SIG_UP',
+            RESET_TOKEN: 'RESET_TOKEN',
+            CHECK_POINT: 'CHECK_POINT',
+        },
+        CATEGORY: {
+            GET_LIST: 'GET_LIST_CATEGORY',
+            DELETE: 'DELETE_CATEGORY',
+            ADD: 'ADD_CATEGORY',
         },
     },
 };

@@ -29,7 +29,6 @@ const checkLoginTypeGoogle = async (req, res, next) => {
     try {
         await UserModel.checkUidGoogle(req.con, req.body, (err, rows) => {
             if (err) return res.status(404).json({ message: err });
-            console.log('rows', rows); // MongLV log fix bug
             if (Array.isArray(rows) && rows.length === 1) {
                 const dataUser = rows[0];
                 if (Number(dataUser.status_user) === 0)
@@ -48,11 +47,10 @@ const checkLoginTypeGoogle = async (req, res, next) => {
             } else {
                 req.body.uid && (req.statusCode = 204);
             }
-            console.log('123', 123); // MongLV log fix bug
             next();
         });
     } catch (e) {
-        console.log('e', e); // MongLV log fix bug
+        console.log('e', e);
     }
 };
 

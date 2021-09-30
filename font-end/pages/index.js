@@ -10,10 +10,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { connect } from 'react-redux';
+// import dynamic from 'next/dynamic';
+// import { connect } from 'react-redux';
 // Component
-import MetaView from '../components/MetaView';
+// import MetaView from '../components/MetaView';
 
 // const component
 // const HeaderController = dynamic(() => import('../components/Header/HeaderController'), { loading: () => <p>...</p> });

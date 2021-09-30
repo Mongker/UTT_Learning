@@ -11,11 +11,12 @@ import { Menu } from 'antd';
 import { DesktopOutlined, PicRightOutlined, TeamOutlined, TransactionOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
-// util
-import { TYPE_MENU } from 'util/TypeMenu';
-import useUserBase from '../../hooks/LogicData/useUserBase';
-
 // const
+MenuView.propTypes = {
+    TYPE_MENU: PropTypes.object.isRequired,
+    setActiveMenu: PropTypes.func.isRequired,
+    activeMenu: PropTypes.string.isRequired,
+};
 function MenuView(props) {
     const { TYPE_MENU, setActiveMenu, activeMenu } = props;
     const role = 'admin';
@@ -48,13 +49,5 @@ function MenuView(props) {
         </Menu>
     );
 }
-
-MenuView.propTypes = {
-    TYPE_MENU: PropTypes.object.isRequired,
-    setActiveMenu: PropTypes.func.isRequired,
-    activeMenu: PropTypes.func.isRequired,
-};
-
-MenuView.defaultProps = {};
 
 export default React.memo(MenuView);

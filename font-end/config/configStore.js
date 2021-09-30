@@ -10,6 +10,8 @@ const CONFIG_STORE = {
     User: 'User',
     HasUser: 'HasUser',
     MeId: 'MeId',
+    HasCategory: 'HasCategory',
+    Category: 'Category',
 };
 
 export default CONFIG_STORE;

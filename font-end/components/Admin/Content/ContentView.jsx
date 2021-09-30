@@ -9,12 +9,17 @@
 
 import React from 'react';
 import { Breadcrumb } from 'antd';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 // Component
 import ContentController from './ContentController';
 
-function ContentView({ activeMenu, refModalProduct }) {
+ContentView.propTypes = {
+    activeMenu: PropTypes.string.isRequired,
+};
+
+ContentView.defaultProps = {};
+function ContentView({ activeMenu }) {
     return (
         <React.Fragment>
             <Breadcrumb style={{ margin: '10px 0' }}>
@@ -24,14 +29,10 @@ function ContentView({ activeMenu, refModalProduct }) {
                 {/*<Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
             </Breadcrumb>
             <div className='site-layout-background' style={{ padding: 24, minHeight: '95%' }}>
-                <ContentController refModalProduct={refModalProduct} activeMenu={activeMenu} />
+                <ContentController activeMenu={activeMenu} />
             </div>
         </React.Fragment>
     );
 }
-
-ContentView.propTypes = {};
-
-ContentView.defaultProps = {};
 
 export default ContentView;

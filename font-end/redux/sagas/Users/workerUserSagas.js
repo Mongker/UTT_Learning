@@ -23,8 +23,13 @@ function* workerLoginGoogle(payload, _function) {
     const response = yield baseAPI.add(CONFIG_TYPE_API.LOGIN_GOOGLE, payload);
     yield fork(workerBaseSagas.workerResponse, response, _function);
 }
+function* workerCheckPoint() {
+    const response = yield baseAPI.add(CONFIG_TYPE_API.CHECK_POINT);
+    yield fork(workerBaseSagas.workerResponse, response);
+}
 const workerUserSagas = {
     workerLogin,
     workerLoginGoogle,
+    workerCheckPoint,
 };
 export default workerUserSagas;

@@ -15,6 +15,7 @@ function* watcherLogin() {
     while (true) {
         const dataTake = yield take(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN);
         const { email, password, providerId } = dataTake.payload;
+        debugger; // Todo by MongLV
         switch (providerId) {
             case 'google.com':
                 yield fork(workerUserSagas.workerLoginGoogle, dataTake.payload, dataTake._function);
@@ -25,8 +26,15 @@ function* watcherLogin() {
         }
     }
 }
+function* watcherCheckPoint() {
+    while (true) {
+        yield take(CONFIG_TYPE_ACTION.SAGA.USER.CHECK_POINT);
+        yield fork(workerUserSagas.workerCheckPoint);
+    }
+}
 
 const watcherUserSagas = {
     watcherLogin,
+    watcherCheckPoint,
 };
 export default watcherUserSagas;

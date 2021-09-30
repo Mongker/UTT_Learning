@@ -44,7 +44,6 @@ module.exports = {
                 avatar= '${data.avatar.toString()}',
                 timestamp_create= '${data.timestamp}'
                 `;
-        console.log('query', query); // MongLV log fix bug
         con.query(query, callback);
     },
     update: (con, id, querySQL, callback) => {

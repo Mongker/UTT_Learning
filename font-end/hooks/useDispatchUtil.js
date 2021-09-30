@@ -15,7 +15,7 @@ import funcDefault from 'util/default/funcDefault';
 function useDispatchUtil() {
     const dispatch = useDispatch();
     return (type = '', payload = {}, funcSuccess = funcDefault, funcError = funcDefault) => {
-        if (typeof type !== 'string' || (typeof payload !== 'object' && !Array(payload))) {
+        if (typeof type !== 'string' || (typeof payload !== 'object' && !Array.isArray(payload))) {
             throw new Error('type phải là 1 string và payload phải là object');
         }
         dispatch({ type: type, payload: payload, _function: { funcSuccess, funcError } });

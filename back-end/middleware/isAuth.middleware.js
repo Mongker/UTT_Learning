@@ -31,6 +31,8 @@ let isAuth = async (req, res, next) => {
 
             // Nếu token hợp lệ, lưu thông tin giải mã được vào đối tượng req, dùng cho các xử lý ở phía sau.
             req.jwtDecoded = decoded;
+            req.nextPasswold = true;
+            req.dataJwtDecoded = { ...decoded.data };
 
             // Cho phép req đi tiếp sang controller.
             next();
@@ -38,13 +40,13 @@ let isAuth = async (req, res, next) => {
             // Nếu giải mã gặp lỗi: Không đúng, hết hạn...etc:
             // Lưu ý trong dự án thực tế hãy bỏ dòng debug bên dưới, mình để đây để debug lỗi cho các bạn xem thôi
             // debug('Error while verify token:', error);
-            return res.status(401).json({
+            return res.status(200).json({
                 message: 'Unauthorized.',
             });
         }
     } else {
         // Không tìm thấy token trong request
-        return res.status(403).send({
+        return res.status(200).send({
             message: 'No token provided.',
         });
     }
