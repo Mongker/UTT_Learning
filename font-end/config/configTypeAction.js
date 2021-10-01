@@ -12,7 +12,7 @@ const CONFIG_TYPE_ACTION = {
         MERGE: 'MERGE',
         CATEGORY: {
             DELETE: 'DELETE_STORE_CATEGORY',
-            // ADD: 'ADD_CATEGORY',
+            ADD: 'ADD_STORE_CATEGORY',
         },
     },
     SAGA: {

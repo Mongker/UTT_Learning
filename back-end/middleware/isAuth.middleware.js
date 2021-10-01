@@ -41,7 +41,7 @@ let isAuth = async (req, res, next) => {
             // Lưu ý trong dự án thực tế hãy bỏ dòng debug bên dưới, mình để đây để debug lỗi cho các bạn xem thôi
             // debug('Error while verify token:', error);
             return res.status(200).json({
-                message: 'Unauthorized.',
+                message: 'Unauthorized',
             });
         }
     } else {

@@ -17,7 +17,8 @@ categoryReducer.path = CONFIG_STORE.Category;
 categoryReducer.value = (Category = fromJS({}), action) => {
     switch (action.type) {
         case `${categoryReducer.path}_${CONFIG_TYPE_ACTION.STORE.MERGE}`:
-            return Category.merge(fromJS(action.merge));
+            console.log('123', JSON.parse(JSON.stringify(Category.merge(fromJS(action.merge))))); // MongLV log fix bug
+            return fromJS(JSON.parse(JSON.stringify(Category.merge(fromJS(action.merge)))));
         default:
             return Category;
     }

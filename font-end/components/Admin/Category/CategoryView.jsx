@@ -31,6 +31,7 @@ const CategoryView = (props) => {
     const { keyTreeActive, setKeyTreeActive } = React.useContext(ContextApp);
     const category = useSelector((status) => status[CONFIG_STORE.Category]);
     const categoryIds = useSelector((status) => status[CONFIG_STORE.HasCategory].getIn(['root', 'itemIds']));
+    console.log('categoryIds', categoryIds); // MongLV log fix bug
 
     // state
     const [treeData, setTreeData] = useState([]);
@@ -82,34 +83,40 @@ const CategoryView = (props) => {
     const updateTreeData = () => {
         let newTreeData = [];
         let dem = 0;
-        categoryIds.map((id) => {
-            const img = category.getIn([id, 'icon'])
-                ? convertUrl(category.getIn([id, 'icon']))
-                : 'https://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
-            if (`${category.getIn([id, 'rootId'])}` === '0') {
-                const children = setChildren(category.getIn([id, 'id']), `${dem}`);
-                newTreeData.push({
-                    title: (
-                        <TitleTreeView
-                            item={category.get(id)}
-                            showModalAdd={showModalAdd}
-                            showModalEdit={showModalEdit}
-                            isDelete={!children.length > 0}
-                        />
-                    ),
-                    key: category.getIn([id, 'rootId']),
-                    icon: <img src={img} alt={'icon'} style={{ width: 20, height: 17, objectFit: 'cover' }} />,
-                    children: children,
-                });
-                dem = dem + 1;
-            }
-        });
+        console.log('categoryIds', categoryIds); // MongLV log fix bug
+        console.log('category', category); // MongLV log fix bug
+        categoryIds &&
+            categoryIds.map((id) => {
+                const img = category.getIn([id, 'icon'])
+                    ? convertUrl(category.getIn([id, 'icon']))
+                    : 'https://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
+                if (`${category.getIn([id, 'rootId'])}` === '0') {
+                    const children = setChildren(category.getIn([id, 'id']), `${dem}`);
+                    newTreeData.push({
+                        title: (
+                            <TitleTreeView
+                                item={category.get(id)}
+                                showModalAdd={showModalAdd}
+                                showModalEdit={showModalEdit}
+                                isDelete={!children.length > 0}
+                            />
+                        ),
+                        id: category.getIn([id, 'rootId']),
+                        key: category.getIn([id, 'rootId']),
+                        icon: <img src={img} alt={'icon'} style={{ width: 20, height: 17, objectFit: 'cover' }} />,
+                        children: children,
+                    });
+                    dem = dem + 1;
+                }
+            });
+        console.log('newTreeData', newTreeData); // MongLV log fix bug
+
         setTreeData(newTreeData);
     };
 
     React.useEffect(() => {
         updateTreeData();
-    }, [categoryIds]);
+    }, [categoryIds.size]);
 
     return (
         <React.Fragment>

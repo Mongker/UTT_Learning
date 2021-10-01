@@ -25,6 +25,7 @@ function* workerLoginGoogle(payload, _function) {
 }
 function* workerCheckPoint() {
     const response = yield baseAPI.add(CONFIG_TYPE_API.CHECK_POINT);
+    debugger; // Todo by MongLV
     yield fork(workerBaseSagas.workerResponse, response);
 }
 const workerUserSagas = {

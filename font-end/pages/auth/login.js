@@ -103,7 +103,6 @@ function Login({ signInWithGoogle, user }) {
         // 	providerId: 'google.com',
         // 	uid: '109936776856068640422',
         // };
-        debugger; // Todo by MongLV
         if (user && user.providerData && user.providerData[0]) {
             const dataUserGoogle = user && user.providerData && user.providerData[0] && user.providerData[0];
             dispatchUtil(CONFIG_TYPE_ACTION.SAGA.USER.LOGIN, dataUserGoogle, funcSuccess, funcError);

@@ -17,6 +17,7 @@ function* workerResetToken() {
         refreshToken: localStorage.getItem('refreshToken'),
     });
     if (message === 200) {
+        debugger; // Todo by MongLV
         yield fork(workerCacheAuth, null, accessToken, null);
         yield window.reload();
     } else if (message === 'Invalid refresh token.') {
@@ -33,25 +34,33 @@ function* workerResetToken() {
  */
 function* workerResponse(response, _function) {
     const { message, auth = {}, data = {} } = response;
-    if (message === 200) {
-        if (typeof data === 'object') {
-            yield all(
-                Object.entries(data).map(function* (list = ['', {}]) {
-                    const nextMerge = yield Object.values(CONFIG_STORE).includes(list[0]);
-                    if (!nextMerge) {
-                        throw new Error(`CONFIG_STORE thiếu trường ${list[0]} mà dữ liệu API trả về`);
-                    }
-                    yield nextMerge && fork(workerMergeResponse, list);
-                }),
-            );
-        }
-        const { meId = '', accessToken = '', refreshToken = '' } = auth && auth;
-        yield !!accessToken && !!refreshToken && fork(workerCacheAuth, meId, accessToken, refreshToken);
-        yield _function && _function.funcSuccess && _function.funcSuccess();
-    } else if (message === 'Unauthorized') {
-        put({ type: CONFIG_TYPE_ACTION.SAGA.USER.RESET_TOKEN });
-    } else {
-        yield _function && _function.funcError && _function.funcError();
+    debugger; // Todo by MongLVt
+
+    switch (message) {
+        case 200:
+            if (typeof data === 'object') {
+                yield all(
+                    Object.entries(data).map(function* (list = ['', {}]) {
+                        const nextMerge = yield Object.values(CONFIG_STORE).includes(list[0]);
+                        if (!nextMerge) {
+                            throw new Error(`CONFIG_STORE thiếu trường ${list[0]} mà dữ liệu API trả về`);
+                        }
+                        yield nextMerge && fork(workerMergeResponse, list);
+                    }),
+                );
+            }
+            const { meId = '', accessToken = '', refreshToken = '' } = auth && auth;
+            yield !!accessToken && !!refreshToken && fork(workerCacheAuth, meId, accessToken, refreshToken);
+            yield _function && _function.funcSuccess && _function.funcSuccess();
+            break;
+        case 'Unauthorized':
+            debugger; // Todo by MongLV
+            yield put({ type: CONFIG_TYPE_ACTION.SAGA.USER.RESET_TOKEN });
+            break;
+        default:
+            yield _function && _function.funcError && _function.funcError();
+            break;
+        // code block
     }
 }
 

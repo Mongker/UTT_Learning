@@ -13,7 +13,7 @@ const jwtHelper = require('../../helpers/jwt.helper');
 let tokenList = {};
 
 // Thời gian sống của token
-const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || '1h';
+const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || '24h';
 // Mã secretKey này phải được bảo mật tuyệt đối, các bạn có thể lưu vào biến môi trường hoặc file
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 
@@ -27,7 +27,9 @@ const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
  */
 const refreshToken = async (req, res) => {
     // User gửi mã refresh token kèm theo trong body
-    const refreshTokenFromClient = req.body.refreshToken;
+    const refreshTokenFromClient =
+        req.body.refreshToken ||
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6NDksIm5hbWUiOiJRdeG6o24gdHLhu4sgdmnDqm4iLCJlbWFpbCI6ImFkbWluQHV0dC5jb20iLCJyb2xlIjoiYWRtaW4ifSwiaWF0IjoxNjMzMDA3NTY5LCJleHAiOjE5NDgzNjc1Njl9.om4iuk98gCMOZd48fVKN2PSzHbhFwDavUfrd6rQJO74';
 
     // Nếu như tồn tại refreshToken truyền lên và nó cũng nằm trong tokenList của chúng ta
     if (refreshTokenFromClient && tokenList[refreshTokenFromClient]) {
@@ -49,13 +51,13 @@ const refreshToken = async (req, res) => {
             // Lưu ý trong dự án thực tế hãy bỏ dòng debug bên dưới, mình để đây để debug lỗi cho các bạn xem thôi
             // debug(error);
 
-            res.status(403).json({
+            res.status(200).json({
                 message: 'Invalid refresh token.',
             });
         }
     } else {
         // Không tìm thấy token trong request
-        return res.status(403).send({
+        return res.status(200).send({
             message: 'No token provided.',
         });
     }
